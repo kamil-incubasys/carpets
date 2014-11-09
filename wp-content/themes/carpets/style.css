@@ -90,8 +90,8 @@ select {
 }
 #header .search-form .search,
 #header .search-form input[type="search"] {
-	border: none;
-	border-bottom: 1px solid #000;
+    
+	border:none;
 	background: none;
 	height: 19px;
 	width: 88%;
@@ -102,6 +102,11 @@ select {
 	padding: 0 1px;
 	float: right;
 }
+
+#header .search-form .search:focus,
+#header .search-form input[type="search"]:focus { outline: none}
+
+
 #header .search-form input[type="submit"] {
 	overflow: hidden;
 	text-indent: -9999px;
@@ -116,7 +121,7 @@ select {
 }
 #header .panel {
 	float: right;
-	width: 176px;
+	width: 192px;
 	text-align: right;
 }
 #header .panel .currency,
@@ -154,7 +159,7 @@ select {
 	font-weight: bold;
 	display: inline-block;
 	vertical-align: middle;
-	padding: 0 25px 0 0;
+	padding: 0 24px 0 0;
 	text-transform: uppercase;
 	margin: 0 0 0 5px;
 }
@@ -189,7 +194,7 @@ select {
 	max-width: 960px;
 	margin: 0 auto;
 	overflow: hidden;
-	padding: 10px 0;
+	padding: 15px 0;
         background: #fff;
 }
 #nav ul {
@@ -206,7 +211,11 @@ select {
 	vertical-align: middle;
 	margin: 0 10px;
 }
-.slider { position: relative; }
+.slider {
+    position: relative;
+    width: 980px;
+    margin: 0 auto;
+}
 .slider .mask {
 	position: relative;
 	overflow: hidden;
@@ -259,7 +268,7 @@ select {
 	text-indent: -9999px;
 	display: block;
 	position: absolute;
-	left: 0;
+	left: 20px;
 	top: 50%;
 	background: url(assets/images/ico-prev.png) no-repeat;
 	width: 44px;
@@ -269,7 +278,7 @@ select {
 .slider .btn-next {
 	background: url(assets/images/ico-next.png) no-repeat;
 	left: auto;
-	right: 0;
+	right: 20px;
 }
 #main {
     background: #fff;

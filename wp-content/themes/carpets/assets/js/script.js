@@ -1,5 +1,7 @@
 (function($){
 $(document).ready(function () {
+    var categoryHtml = '';
+    
     $( '.product' ).addClass('col');
 
     $( '.orderby' ).on('change', function () {
@@ -21,7 +23,7 @@ $(document).ready(function () {
     code = $('div.images div.thumbnails').html();
     console.log(code);
 
-    var src = 'http://localhost/carpets/wp-content/plugins/woocommerce/assets/images/placeholder.png';
+    var src = siteUrl + '/wp-content/plugins/woocommerce/assets/images/placeholder.png';
     if (code === undefined) {
         code = $( 'div.slide div.images' ).html();
         console.log(code);
@@ -72,26 +74,47 @@ $(document).ready(function () {
             var href = $( this ).children('a').attr('href');
             html += '<div class="widget"><h4>' +text+ '</h4>';
 
-            $( this ).children('ul').children('li').each(function(i, obj){
-                text = $( this ).children('a').html();
-                href = $( this ).children('a').attr('href');
-                html += '<div class="check-block"><div class="head-checkbox"><input type="checkbox" value="' +href+ '">'+
-                '<label for="classic">' +text+ '</label></div><ul class="check-list">';
-
+            code = $( this ).children('ul').children('li').children('ul').children('li').html();
+            if (code === undefined){
+                html += '<ul class="check-list">';
+                
                 $( this ).children('ul').children('li').each(function(i, obj){
                     text = $( this ).children('a').html();
                     href = $( this ).children('a').attr('href');
-
                     html +=	'<li><input type="checkbox" value="'+href+ '">'+
-                            '<label for="Pak">' +text+ '</label></li>';
-
-                    //Traverse here for more children in a common html structure with recursion
-                    //$( this ).children('ul').children('li').each(function(i, obj){});
+                            '<label for="Pak">' +text+ '</label>';
+                    html += '</li>';
                 });
+                
+                html += '</ul>';
+            }
+            else{
+                $( this ).children('ul').children('li').each(function(i, obj){
+                    text = $( this ).children('a').html();
+                    href = $( this ).children('a').attr('href');
+                    html += '<div class="check-block"><div class="head-checkbox"><input type="checkbox" value="' +href+ '">'+
+                        '<label for="classic">' +text+ '</label></div><ul class="check-list">';
 
-                html += '</ul></div>';
-            });
+                    $( this ).children('ul').children('li').each(function(i, obj){
+                        text = $( this ).children('a').html();
+                        href = $( this ).children('a').attr('href');
+                        html +=	'<li><input type="checkbox" value="'+href+ '">'+
+                                '<label for="Pak">' +text+ '</label>';
 
+                        //Traverse here for more children in a common html structure with recursion
+                        //$( this ).children('ul').children('li').each(function(i, obj){});
+                        console.log('LOADED----------------------------------------');
+                        categoryHtml = '';
+                        categoryHtml = makeSubCategories($( this ));
+                        console.log('LULL-----------------------------' + categoryHtml + '-------------------LULL');
+                        html += categoryHtml;
+                        html += '</li>';
+                    });
+
+                    html += '</ul></div>';;
+                });   
+            }
+            
             html += '</div>';
         });
         html += '</div>';
@@ -119,17 +142,15 @@ $(document).ready(function () {
     code = $( 'nav.woocommerce-breadcrumb' ).html();
     console.log(code);
     if (code !== undefined){
+        var html = '<div class="breadcrumbs"><ul>';
+        $( 'nav.woocommerce-breadcrumb' ).find('a').each(function(){
+            html += '<li><a href="' +$( this ).attr('href')+ '">' +$( this ).html()+ '</a></li>';
+        });
+        var breadCrumbs = code.split('</a> /');
+        html += '<li>' +breadCrumbs[breadCrumbs.length-1]+ '</li></ul></div>';
+        $( '#main h2' ).first().replaceWith(html);
         
-//        			<div class="breadcrumbs">
-//				<ul>
-//					<li><a href="#">Home</a></li>
-//					<li><a href="#">Collections</a></li>
-//					<li><a href="#">Tribal</a></li>
-//					<li>Kashan</li>
-//				</ul>
-//			</div>
-        $( '#main h2' ).first().replaceWith('<h2>' +code+ '</h2>');
-        code = $( 'nav.woocommerce-breadcrumb' ).remove();
+        $( 'nav.woocommerce-breadcrumb' ).remove();
     }
     
     $( 'div.select-wrap input' ).first().after('<label for="quantity-select">Quantity</label>');
@@ -144,5 +165,25 @@ $(document).ready(function () {
                 $( this ).css('height', '161px');
             }
     });
+    
+    function makeSubCategories(obj){
+        var html = '';
+        var code = obj.children('ul').children('li').html();
+        if (code !== undefined){
+            html += '<ul class="check-list">';
+            obj.children('ul').children('li').each(function(i, obj){
+                var text = $( this ).children('a').html();
+                var href = $( this ).children('a').attr('href');
+
+                html +=	'<li><input type="checkbox" value="'+href+ '">'+
+                        '<label for="Pak">' +text+ '</label>';
+
+                html += makeSubCategories($( this ));
+                html += '</li>';
+            });
+            html += '</ul>';
+        }
+        return html;
+    }
 });
 })(jQuery);

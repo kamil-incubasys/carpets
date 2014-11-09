@@ -12,6 +12,7 @@
 	<!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.min.js"></script>-->
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
+        <script>var siteUrl = '<?php echo get_site_url(); ?>';</script>
 </head>
 <body>
 	<div id="wrapper">
