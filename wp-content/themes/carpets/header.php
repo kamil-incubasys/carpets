@@ -31,7 +31,7 @@
 							<div class="drop">
 								<div class="list">
 									<ul>
-										<li><a href="#">ENG</a></li>
+										<li class="active"><a href="#">ENG</a></li>
 										<li><a href="#">中文</a></li>
 										<li><a href="#">JAP</a></li>
 										<li><a href="#">KOR</a></li>
@@ -54,6 +54,7 @@
 							</div>
 						</div>
 						<a href="#" class="login">Log in</a>
+						<a href="#" class="cart-bg"></a>
 					</div>
 					<strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
 				</div>
