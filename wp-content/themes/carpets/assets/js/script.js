@@ -106,7 +106,7 @@ $(document).ready(function () {
                         console.log('LOADED----------------------------------------');
                         categoryHtml = '';
                         categoryHtml = makeSubCategories($( this ));
-                        console.log('LULL-----------------------------' + categoryHtml + '-------------------LULL');
+                        console.log('L-----------------------------' + categoryHtml + '-------------------L');
                         html += categoryHtml;
                         html += '</li>';
                     });
@@ -123,6 +123,7 @@ $(document).ready(function () {
         $( 'div.category_checkboxes' ).on('mouseover mouseenter mousemove mouseout mousedown mouseleave mouseup', 'div.chk-area', function(e){
             if ($( this ).hasClass('chk-checked')){
                 $( this ).siblings('input').attr('checked', 'checked');
+                setCookie("selectedCategory", $( this ).siblings('input').val());
                 window.location.href = $( this ).siblings('input').val();
             }
         });
@@ -166,6 +167,34 @@ $(document).ready(function () {
             }
     });
     
+    var categoryCookie = getCookie('selectedCategory');
+    $( '.category_checkboxes li input' ).each(function(i, obj){
+        if (categoryCookie !== false && categoryCookie !== ''){
+            categoryCookie = categoryCookie.trim();
+            if (categoryCookie === $( this ).val()){
+                // Check if it is current URl then do not delete the cookie
+                if (document.URL !== categoryCookie){
+                    setCookie("selectedCategory", '');
+                }
+                else{
+                    checkParentCategoriesCheckBoxes($( this ));
+                }
+            }
+        }
+    });
+    
+    $( '.woocommerce-result-count' ).after($( '.form-wppp-select' ));
+
+    function checkParentCategoriesCheckBoxes(obj){
+        var code = obj.parent('li').html();
+        if (code !== undefined){
+            obj.prop('checked', true);
+            obj.parent('li').parent('ul').siblings('input').prop('checked', true);
+            obj.parent('li').parent('ul').siblings('div.head-checkbox').children('input').prop('checked', true);
+            checkParentCategoriesCheckBoxes(obj.parent('li').parent('ul').siblings('input'));
+        }
+    }
+    
     function makeSubCategories(obj){
         var html = '';
         var code = obj.children('ul').children('li').html();
@@ -184,6 +213,73 @@ $(document).ready(function () {
             html += '</ul>';
         }
         return html;
+    }
+    
+    function writeCookie(key, value)
+    {
+        var now = new Date();
+        now.setMonth( now.getMonth() + 1 ); 
+        var cookievalue = value + ";"
+        document.cookie = key + "=" + cookievalue;
+        document.cookie = "expires=" + now.toUTCString() + ";"
+        //alert("Setting Cookies : " + key + "=" + cookievalue );
+    }
+
+    function getCookie(Name){ 
+            var re=new RegExp(Name+"=[^;]+", "i") //construct RE to search for target name/value pair
+            if (document.cookie.match(re)) //if cookie found
+                    return document.cookie.match(re)[0].split("=")[1] //return its value
+            return false;
+    }
+    function setCookie(name, value){
+            document.cookie = name + "=" + value + "; path=/"
+    }
+
+    function readCookie()
+    {
+        var allcookies = document.cookie;
+        alert("All Cookies : " + allcookies );
+
+        // Get all the cookies pairs in an array
+        cookiearray  = allcookies.split(';');
+
+        // Now take key value pair out of this array
+        /*for(var i=0; i<cookiearray.length; i++){
+            name = cookiearray[i].split('=')[0];
+            value = cookiearray[i].split('=')[1];
+            alert("Key is : " + name + " and Value is : " + value);
+        }*/
+    }
+
+    function readSingleCookie(key)
+    {
+        var allcookies = document.cookie;
+        //alert("All Cookies : " + allcookies );
+
+        // Get all the cookies pairs in an array
+        cookiearray  = allcookies.split(';');
+
+        // Now take key value pair out of this array
+        for(var i=0; i<cookiearray.length; i++){
+            var name = cookiearray[i].split('=')[0];
+            var value = cookiearray[i].split('=')[1];
+            alert("Key is : " + name + " and Value is : " + value);
+            if(name == key){
+                return value;
+            }
+        }
+
+        return false;
+    }
+
+    function deleteCookie(key)
+    {
+        var now = new Date();
+        now.setMonth( now.getMonth() - 1 ); 
+        var cookievalue = escape('') + ";"
+        document.cookie=key + "=" + cookievalue;
+        document.cookie = "expires=" + now.toUTCString() + ";"
+//        alert("Deleting Cookies : " + key + "=" + cookievalue );
     }
 });
 })(jQuery);

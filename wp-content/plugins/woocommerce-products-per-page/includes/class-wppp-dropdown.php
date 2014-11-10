@@ -98,7 +98,7 @@ class WPPP_Dropdown extends Woocommerce_Products_Per_Page {
 				<?php do_action( 'wppp_before_dropdown' ); ?>
 
 				<select name="wppp_ppp" onchange="this.form.submit()" class="select wppp-select">
-
+<option value="">View</option>
 					<?php
 					global $woocommerce;
 					foreach( $this->products_per_page_options as $key => $value ) :

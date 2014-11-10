@@ -53,8 +53,9 @@
 								</div>
 							</div>
 						</div>
-						<a href="#" class="login">Log in</a>
-						<a href="#" class="cart-bg"></a>
+                                                <?php if ( is_user_logged_in() ){ echo '<a href="' .wp_logout_url(). '" class="login">Log out</a>';}
+                                                else { echo '<a href="' .wp_login_url(). '" class="login">Log in</a>';}?>
+						<a href="<?php echo get_site_url(); ?>/cart" class="cart-bg"></a>
 					</div>
 					<strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
 				</div>
