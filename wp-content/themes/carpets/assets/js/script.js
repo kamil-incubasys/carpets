@@ -111,7 +111,7 @@ $(document).ready(function () {
                         html += '</li>';
                     });
 
-                    html += '</ul></div>';;
+                    html += '</ul></div>';
                 });   
             }
             
@@ -120,11 +120,24 @@ $(document).ready(function () {
         html += '</div>';
         $( 'ul.product-categories' ).replaceWith(html);
         
-        $( 'div.category_checkboxes' ).on('mouseover mouseenter mousemove mouseout mousedown mouseleave mouseup', 'div.chk-area', function(e){
-            if ($( this ).hasClass('chk-checked')){
-                $( this ).siblings('input').attr('checked', 'checked');
-                setCookie("selectedCategory", $( this ).siblings('input').val());
-                window.location.href = $( this ).siblings('input').val();
+//        $( 'div.category_checkboxes' ).on('mouseover mouseenter mousemove mouseout mousedown mouseleave mouseup', 'div.chk-area', function(e){
+//            if ($( this ).hasClass('chk-checked')){
+//                $( this ).siblings('input').attr('checked', 'checked');
+//                setCookie("selectedCategory", $( this ).siblings('input').val());
+//                if (document.URL !== $( this ).siblings('input').val()){
+//                    window.location.href = $( this ).siblings('input').val();
+//                }
+//            }
+//        });
+        $( 'div.category_checkboxes' ).on('change', 'input:checkbox', function(e){
+            setCookie("selectedCategory", $( this ).val());
+            if ($( this ).prop('checked')){
+                if (document.URL !== $( this ).val()){
+                    window.location.href = $( this ).val();
+                }
+            }
+            else if (!$( this ).prop('checked')){
+                window.location.href = siteUrl + '/shop';
             }
         });
     }
@@ -184,6 +197,34 @@ $(document).ready(function () {
     });
     
     $( '.woocommerce-result-count' ).after($( '.form-wppp-select' ));
+    
+    code = $( 'div.price_slider_wrapper' ).html();
+    console.log(code);
+    if (code !== undefined){
+        var form = $( 'div.price_slider_wrapper' ).parent('form');
+        var min = $( '#min_price' ).data('min');
+        var max = $( '#max_price' ).data('max');
+        form.siblings('h3').remove();
+        
+        form.html(
+            '<div class="leftLabel"></div><div class="rightLabel"></div>'+
+            '<div class="nstSlider" data-range_min="0" data-range_max="' +max+ '" data-cur_min="0"  data-cur_max="' +max+ '">'+
+                '<div class="highlightPanel"></div>'+
+                '<div class="bar"></div>'+
+                '<div class="leftGrip"></div>'+
+                '<div class="rightGrip"></div>'+
+                '<input type="hidden" id="min_price" name="min_price" value="" data-min="' +min+ '" placeholder="Min price">'+
+                '<input type="hidden" id="max_price" name="max_price" value="" data-max="' +max+ '" placeholder="Max price">'+
+                '<a href="javascript:" class="filter_price">Go</a>'+
+            '</div>'
+            );
+            
+//        form.parent('form').css('width', '70%');
+    }
+    
+    $( '.filter_price' ).click(function(){
+        $( this ).parent('div').parent('form').submit();
+    });
 
     function checkParentCategoriesCheckBoxes(obj){
         var code = obj.parent('li').html();

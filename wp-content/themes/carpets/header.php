@@ -88,7 +88,7 @@
 				<div class="slideset">
 					<div class="slide">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/img.jpg" alt="">
-						<span class="slide-title"><span>colection</span></span>
+						<span class="slide-title"><span>Collection</span></span>
 					</div>
 					<div class="slide">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/img1.jpg" alt="">

@@ -53,14 +53,18 @@
         <?php // wp_footer(); ?>
         <script>
         (function($){
-            $('.nstSlider').nstSlider({
-                "left_grip_selector": ".leftGrip",
-                "right_grip_selector": ".rightGrip",
-                "value_bar_selector": ".bar",
-                "value_changed_callback": function(cause, leftValue, rightValue) {
-                    $('.leftLabel').text(leftValue);
-                    $('.rightLabel').text(rightValue);
-                },
+            $(document).ready(function () {
+                $('.nstSlider').nstSlider({
+                    "left_grip_selector": ".leftGrip",
+                    "right_grip_selector": ".rightGrip",
+                    "value_bar_selector": ".bar",
+                    "value_changed_callback": function(cause, leftValue, rightValue) {
+                        $('.leftLabel').text(leftValue);
+                        $('.rightLabel').text(rightValue);
+                        $( '#min_price' ).val(leftValue);
+                        $( '#max_price' ).val(rightValue);
+                    },
+                });
             });
             })(jQuery);
 
