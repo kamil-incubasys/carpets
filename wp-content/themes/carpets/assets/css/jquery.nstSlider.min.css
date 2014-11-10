@@ -1,0 +1,9 @@
+.is_clickable{cursor:hand;cursor:pointer}
+.nstSlider{cursor:hand;cursor:pointer;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;position:relative;width:90%;height:2px;background:#aaa; clear:both; margin: 0 0 20px;}
+.nstSlider .leftGrip.gripHighlighted,.nstSlider .rightGrip.gripHighlighted{background:#134}
+.nstSlider .leftGrip,.nstSlider .rightGrip{position:absolute;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;width:4px;height:6px;background:#fff; top:-2px;}
+.nstSlider .leftGrip{ background: url(../images/arrow-left.png) no-repeat;}
+.nstSlider .rightGrip{ background: url(../images/arrow-right.png) no-repeat;}
+.nstSlider .bar{-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;position:absolute;background:#606060;height:2px;top:0}
+.nstSlider .highlightPanel{-webkit-transition:all 500ms ease-in-out;-moz-transition:all 500ms ease-in-out;-ms-transition:all 500ms ease-in-out;-o-transition:all 500ms ease-in-out;transition:all 500ms ease-in-out;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;position:absolute;background:#e87722;height:20px;top:0}
+.leftLabel, .rightLabel{ float:left; width:50%; margin: 0 0 10px;}

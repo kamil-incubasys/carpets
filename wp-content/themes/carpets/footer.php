@@ -20,21 +20,54 @@
 					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo6.png" alt=""></li>
 				</ul>
 			</div>
-			<div class="info-area">
-				<div class="holder">
+			
+		</footer>
+		<div class="info-area">
+				
+				<?php
+					$defaults = array(										
+						'container_class' => 'holder',
+						'menu_class' => 'fnav',
+						'items_wrap'      => '<ul class="%2$s">%3$s</ul><span class="info">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>'
+						
+					);
+
+					wp_nav_menu( $defaults );
+
+?>
+
+				<!-- <div class="holder">
 					<ul class="fnav">
-					<li><a href="#">About</a></li>
+						
+					<li><a href="<?php echo get_site_url(); ?>">About</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="#">FAQ</a></li>
 					<li><a href="#">Inspiration</a></li>
 					<li><a href="#">Store Directory</a></li>
 					<li><a href="#">Terms &amp; Conditions</a></li>
-				</ul>
+					</ul>
 				<span class="info">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>
-				</div>
+				</div> -->
 			</div>
-		</footer>
 	</div>
         <?php // wp_footer(); ?>
+        <script>
+        (function($){
+            $('.nstSlider').nstSlider({
+                "left_grip_selector": ".leftGrip",
+                "right_grip_selector": ".rightGrip",
+                "value_bar_selector": ".bar",
+                "value_changed_callback": function(cause, leftValue, rightValue) {
+                    $('.leftLabel').text(leftValue);
+                    $('.rightLabel').text(rightValue);
+                },
+            });
+            })(jQuery);
+
+            // Call methods and such...
+            // var highlightMin = Math.random() * 20,
+            //     highlightMax = highlightMin + Math.random() * 80;
+            // $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);
+        </script>
 </body>
 </html>

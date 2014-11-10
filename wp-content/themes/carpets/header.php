@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title><?php bloginfo('name'); ?> <?php wp_title('-'); ?></title>
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php bloginfo('template_directory') ?>/assets/css/jquery.nstSlider.min.css" type="text/css" />
         
         <?php wp_head(); ?>
         
@@ -12,7 +13,18 @@
 	<!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.min.js"></script>-->
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
+        <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.nstSlider.min.js"></script>
+        <!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery-loader.js"></script>-->
+
+
+
+
+
         <script>var siteUrl = '<?php echo get_site_url(); ?>';</script>
+
+
+
+
 </head>
 <body>
 	<div id="wrapper">
@@ -76,18 +88,21 @@
 				<div class="slideset">
 					<div class="slide">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/img.jpg" alt="">
+						<span class="slide-title"><span>colection</span></span>
 					</div>
 					<div class="slide">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/img1.jpg" alt="">
+						<span class="slide-title"><span>DESIGN</span></span>
 					</div>
 					<div class="slide">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/img2.jpg" alt="">
+						<span class="slide-title"><span>MAINTENANCE</span></span>
 					</div>
 				</div>
 			</div>
 			<div class="holder">
 				<div class="heading">
-					<h1><?php echo get_the_title(); ?></h1>
+					<!-- <h1><?php echo get_the_title(); ?></h1> -->
 					<a href="#" class="btn-next">Next</a>
 					<a href="#" class="btn-prev">Prev</a>
 				</div>

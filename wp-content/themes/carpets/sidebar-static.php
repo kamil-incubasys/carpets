@@ -40,6 +40,30 @@
                                             </div>
                                         <?php endif; ?>
                                     <?php endif; ?>  
+                                    	 <div class="leftLabel"></div>
+        <div class="rightLabel"></div>
+                                            <div class="nstSlider" 
+            data-range_min="0" data-range_max="100"   
+            data-cur_min="10"  data-cur_max="90">     <!-- 2.1. add data attributes for the range: the min/max values the user can select -->
+                                                      <!-- 2.2. add the slider values: the initial values within the range the grips should be initially set at -->
+
+            <div class="highlightPanel"></div>        <!-- 2.3. (optional) you can use this in combination
+                                                                with highlight_range if you need to, or
+                                                                you can just omit it. Also, you can move
+                                                                this element after as well if you want to
+                                                                highlight above the slider grips -->
+
+            <div class="bar"></div>                   <!-- 2.4. (optional) this is the bar that fills the
+                                                                area between the left and the right grip -->
+                                                                
+            <div class="leftGrip"></div>              <!-- 2.5  the left grip -->
+            <div class="rightGrip"></div>             <!-- 2.6  (optional) the right grip. Just omit if 
+                                                                you don't need one -->
+        </div>
+
+        <!-- These two are actually exernal to the plugin, but you are likely to need them... the plugin
+             does the math, but it's up to you to update the content of these two elements. -->
+       
 				</aside>
                                 <?php endif; ?>
 <?php // wp_list_categories(); ?>

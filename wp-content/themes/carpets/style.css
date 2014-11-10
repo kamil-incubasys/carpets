@@ -234,11 +234,11 @@ z-index: 9999;
 #nav li {
 	display: inline-block;
 	vertical-align: middle;
-	margin: 0 10px;
+	margin: 0 15px;
 }
 .slider {
     position: relative;
-    width: 980px;
+    max-width: 980px;
     margin: 0 auto;
     top: 111px;
 }
@@ -254,6 +254,7 @@ z-index: 9999;
 .slider .slide {
 	float: left;
 	height: 250px;
+	position: relative;
 }
 .slider img {
 	width: auto;
@@ -276,19 +277,31 @@ z-index: 9999;
 	padding: 100px 48px;
 	position: relative;
 }
-.slider h1 {
-	display: inline-block;
-	vertical-align: middle;
+.slider .slide-title{
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	top: 40%;
+}
+.slider .slide-title span {
 	font-size: 38px;
 	line-height: 46px;
-	margin: 0 auto;
 	color: #fff;
 	padding: 0 60px;
 	text-transform: uppercase;
 	font-weight: normal;
 	border-bottom: 2px solid #fff;
 }
-.product_meta{ padding: 10px 0 0;}
+.product_meta{
+	padding: 10px 0 0;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 14px;
+}
+.woocommerce-product-rating{
+	overflow: hidden;
+	padding: 10px 0;
+}
 .slider .btn-prev,
 .slider .btn-next {
 	overflow: hidden;
@@ -296,7 +309,7 @@ z-index: 9999;
 	display: block;
 	position: absolute;
 	left: 20px;
-	top: 50%;
+	top: 62%;
 	background: url(assets/images/ico-prev.png) no-repeat;
 	width: 44px;
 	height: 44px;
@@ -374,9 +387,8 @@ z-index: 9999;
 #main .collection-area {
 	overflow: hidden;
 	padding: 20px 0;
-	text-align: center;
 }
-#main .collection-area .img-hold:first-child{ margin: 0;}
+#main .collection-area .img-hold:first-child{ margin: 0 0 10px;}
 #main .collection-area .img-hold {
 	display: inline-block;
 	vertical-align: middle;
@@ -402,15 +414,15 @@ z-index: 9999;
 }
 #main .col-details {
 	overflow: hidden;
-     width:100%;
-     text-align: center;
-        padding: 10px;
+    width:100%;
+	text-align: left;
+    padding: 10px 0;
 }
 #main .col-details .col {
 	display: inline-block;
 	vertical-align: top;
-	width: 27.5%;
-	margin:0 4.7 20px 0;
+	width: 22.5%;
+	margin:0 1.7% 20px 0;
 }
 #main .col-details .detail-area {
 	background: #f8f4e9;
@@ -499,7 +511,10 @@ z-index: 9999;
 	float: left;
 	width: 140px;
 }
-.form-wppp-select{ float: left !important;}
+.form-wppp-select{
+	float: left !important;
+	margin:0 15px 0 0;
+}
 .woocommerce-ordering{ float:right;}
 #main .opt-area .text-area {
 	overflow: hidden;
@@ -1022,7 +1037,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ecd9', end
 }
 #footer .holder{
 	max-width: 960px;
-	margin: 0 auto;
+	margin: 0 auto 62px;
 	overflow: hidden;
 	padding: 0 10px;
     
@@ -1059,34 +1074,44 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ecd9', end
 	display: inline-block;
 	vertical-align: middle;
 }
-#footer .info-area{
-	padding: 20px 0;
+#wrapper .info-area{
+	padding: 20px 12px;
 	overflow: hidden;
 	background: #f8f4e9;
+	position: fixed;
+	width: 100%;
+	bottom:0;
+	z-index: 9999;
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
-#footer .info-area .holder{
+#wrapper .info-area .holder{
 	max-width: 980px;
 	margin: 0 auto;
 	overflow: hidden;
 	font-size: 11px;
 	line-height: 14px;
 }
-#footer .fnav {
+#wrapper .info-area .fnav {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	float: left;
 }
-#footer .fnav li {
+#wrapper .info-area .fnav li {
 	float: left;
-	margin: 0 25px 0 0;
+	margin: 0 25px 5px 0;
 }
-#footer .info {
+#wrapper .info-area .info {
 	display: block;
 	overflow: hidden;
 	text-align: right;
+	float: right;
 }
-#footer .info a { color: #00f; }
+#wrapper .info-area .info a {
+	color: #000;
+}
 
 @media only screen and (max-width:960px) {
 body { min-width: 320px; }
@@ -1116,7 +1141,37 @@ body { min-width: 320px; }
 }
 
 @media only screen and (max-width:767px) {
-	.slider{ top: 187px;}
+#wrapper .info-area .fnav{
+		width: 100%;
+		text-align: center;
+}
+#wrapper .info-area .fnav li{
+	float: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+#wrapper .info-area .holder{ text-align: center;}
+.form-wppp-select,
+.woocommerce-ordering{
+	width: 100% !important;
+	margin: 0 0 10px;
+}
+#main .collection-area .img-hold:first-child{ margin:0 auto 10px}
+#wrapper .info-area .info{
+	text-align: center !important;
+	display: inline-block;
+	float: none;
+	margin: 10px 0 0;
+
+}
+#footer .holder{ margin: 0 auto 101px;}
+.woocommerce-ordering{ margin: 0 0 10px !important;}
+.select-area{ width: 100% !important;}
+.woocommerce-ordering{
+	float: left !important;
+	margin: 10px 0;
+}
+.slider{ top: 187px;}
 #header .panel {
 	float: none;
 	margin: 0 auto 15px;
@@ -1169,7 +1224,7 @@ body { min-width: 320px; }
 	vertical-align: top;
 	width: 48%;
 }
-#main{ padding: 403px 0 0;}
+#main{ padding: 203px 0 0;}
 #sidebar .color-list { padding: 0 10px; }
 #main .breadcrumbs li:first-child { padding: 0; }
 #main .breadcrumbs li { padding: 0 0 0 30px; }
@@ -1301,7 +1356,7 @@ body { min-width: 320px; }
 	cursor: default;
 	height: 26px;
 	float: left;
-	min-width: 116px !important;
+	min-width: 133px !important;
 	font-size: 11px;
 	line-height: 18px;
 }
@@ -1325,7 +1380,7 @@ body { min-width: 320px; }
 .select-options {
 	position: absolute;
 	overflow: hidden;
-	background: #fff;
+	background: url(assets/images/bg-opacity.png);
 	z-index: 2000;
 }
 .select-options .drop-holder {
@@ -1334,6 +1389,7 @@ body { min-width: 320px; }
 	height: 1%;
 	font-size: 11px;
 	line-height: 18px;
+	padding: 7px 0 0;
 }
 .select-options ul {
 	list-style: none;
@@ -1354,7 +1410,7 @@ body { min-width: 320px; }
 }
 .select-options .item-selected a {
 	text-decoration: none;
-	background: #007;
+	background: #c6361e;
 	color: #fff;
 }
 /* select options optgroup example styles */
@@ -1364,3 +1420,35 @@ body { min-width: 320px; }
 	padding: 5px;
 }
 .select-options .optgroup ul a { padding-left: 30px; }
+
+
+
+
+/*----------------------------------Price Range Style-------------------------------*/
+.priceRangeInfo{
+    position: relative;
+    height: 30px;
+    margin-top: 60px;
+}
+.priceRangeInfo label{
+    position: absolute;
+    top: -30px;
+    left: 10px;
+}                            /* moves label field */
+.priceRangeInfo #buying_slider_min{
+    top: -40px;
+    position: absolute;
+    left: 100px;
+}       /* moves first input field */ 
+.priceRangeInfo #buying_slider_max{
+    top: -40px;
+    position: absolute;
+    left: 170px;
+}      /* move second input field */ 
+.priceRangeInfo div.ui-slider{
+    position: absolute;
+}                   /* move both sliders - adressing 1st slider with CSS is hard */ 
+.priceRangeInfo div:last-child{
+    position: absolute;
+    left: 0px;
+}
