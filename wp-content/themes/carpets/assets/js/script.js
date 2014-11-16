@@ -167,7 +167,7 @@ $(document).ready(function () {
         $( 'nav.woocommerce-breadcrumb' ).remove();
     }
     
-    $( 'div.select-wrap input' ).first().after('<label for="quantity-select">Quantity</label>');
+    $( 'div.select-wrap input' ).first().after('');
     $( 'div.select-wrap input' ).attr('style', 'width: 46px !important;');
     
     var width = '';
@@ -208,6 +208,7 @@ $(document).ready(function () {
         
         form.html(
             '<div class="leftLabel"></div><div class="rightLabel"></div>'+
+            '<a href="javascript:" class="filter_price">Go</a>'+
             '<div class="nstSlider" data-range_min="0" data-range_max="' +max+ '" data-cur_min="0"  data-cur_max="' +max+ '">'+
                 '<div class="highlightPanel"></div>'+
                 '<div class="bar"></div>'+
@@ -215,15 +216,15 @@ $(document).ready(function () {
                 '<div class="rightGrip"></div>'+
                 '<input type="hidden" id="min_price" name="min_price" value="" data-min="' +min+ '" placeholder="Min price">'+
                 '<input type="hidden" id="max_price" name="max_price" value="" data-max="' +max+ '" placeholder="Max price">'+
-                '<a href="javascript:" class="filter_price">Go</a>'+
             '</div>'
+            
             );
             
 //        form.parent('form').css('width', '70%');
     }
     
     $( '.filter_price' ).click(function(){
-        $( this ).parent('div').parent('form').submit();
+        $( this ).parent('form').submit();
     });
 
     function checkParentCategoriesCheckBoxes(obj){

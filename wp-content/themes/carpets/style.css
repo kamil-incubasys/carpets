@@ -328,7 +328,7 @@ z-index: 9999;
 #main h2 {
 	font-size: 25px;
 	line-height: 28px;
-	margin: 0 0 32px;
+	margin: 0 0 15px;
 	border-bottom: 1px solid #bcbcbc;
 	text-align: center;
 	text-transform: uppercase;
@@ -619,6 +619,9 @@ z-index: 9999;
 	width: 105px;
 }
 .select-wrap input[type="number"]{ width: 80px !important}
+.select-wrap label{ font-size: 12px; line-height: 14px;}
+
+
 .qty{ width: 46px !important;}
 #main .detail-holder .quatity-wrap .select-wrap input[type="number"]{
     width: 40%;
@@ -1033,6 +1036,21 @@ background: -ms-linear-gradient(top,  #f0ecd9 0%,#f0ecda 42%,#fefdfb 100%); /* I
 background: linear-gradient(to bottom,  #f0ecd9 0%,#f0ecda 42%,#fefdfb 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ecd9', endColorstr='#fefdfb',GradientType=0 ); /* IE6-8 */
 
+/*Google Select */
+.goog-te-gadget-simple{
+	margin: 0 0 10px !important;
+}
+.goog-te-menu-value:hover{ text-decoration: none;}
+
+
+/*Style End */
+
+
+
+
+
+
+
 
 }
 #footer .holder{
@@ -1424,31 +1442,3 @@ body { min-width: 320px; }
 
 
 
-/*----------------------------------Price Range Style-------------------------------*/
-.priceRangeInfo{
-    position: relative;
-    height: 30px;
-    margin-top: 60px;
-}
-.priceRangeInfo label{
-    position: absolute;
-    top: -30px;
-    left: 10px;
-}                            /* moves label field */
-.priceRangeInfo #buying_slider_min{
-    top: -40px;
-    position: absolute;
-    left: 100px;
-}       /* moves first input field */ 
-.priceRangeInfo #buying_slider_max{
-    top: -40px;
-    position: absolute;
-    left: 170px;
-}      /* move second input field */ 
-.priceRangeInfo div.ui-slider{
-    position: absolute;
-}                   /* move both sliders - adressing 1st slider with CSS is hard */ 
-.priceRangeInfo div:last-child{
-    position: absolute;
-    left: 0px;
-}
