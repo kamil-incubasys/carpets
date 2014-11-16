@@ -1,7 +1,7 @@
 			</div>
 		</div>
 		<footer id="footer">
-			<div class="holder">
+
 				<div class="f-content">
 					<div class="image-area">
 						<img src="<?php bloginfo('template_directory') ?>/assets/images/carpet-logo.png" alt="">
@@ -19,7 +19,7 @@
 					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo5.png" alt=""></li>
 					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo6.png" alt=""></li>
 				</ul>
-			</div>
+
 			
 		</footer>
 		<div class="info-area">
@@ -28,26 +28,14 @@
 					$defaults = array(										
 						'container_class' => 'holder',
 						'menu_class' => 'fnav',
+                        'menu'       => 'footer-nav',
 						'items_wrap'      => '<ul class="%2$s">%3$s</ul><span class="info">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>'
 						
 					);
 
 					wp_nav_menu( $defaults );
-
 ?>
 
-				<!-- <div class="holder">
-					<ul class="fnav">
-						
-					<li><a href="<?php echo get_site_url(); ?>">About</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Inspiration</a></li>
-					<li><a href="#">Store Directory</a></li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
-					</ul>
-				<span class="info">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>
-				</div> -->
 			</div>
 	</div>
         <?php // wp_footer(); ?>
@@ -65,10 +53,25 @@
                         $( '#max_price' ).val(rightValue);
                     },
                 });
+                if($(".main-nav").offset()!=undefined){
+                    var navPos = $(".main-nav").offset().top;
+                    $(window).scroll(function(){
+                        var scrollPos = $(this).scrollTop();
+                        if(scrollPos >= navPos){
+                            $('.add-nav').css({"display":"block"});
+                            $('.logo, .lang, .currency, .login, .main-nav').hide();
+                        }else if(scrollPos < navPos){
+                            $('.add-nav').css({"display":"none"});
+                            $('.logo, .lang, .currency, .login, .main-nav').show();
+                        }
+                    });
+                }
             });
             })(jQuery);
 
-            // Call methods and such...
+
+
+        // Call methods and such...
             // var highlightMin = Math.random() * 20,
             //     highlightMax = highlightMin + Math.random() * 80;
             // $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);

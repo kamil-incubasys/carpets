@@ -1,11 +1,10 @@
 <?php
 /*
-Template Name: index
+Template Name: About US
 */
-
 get_header(); ?>
 <?php get_sidebar('static'); ?>
-				<!--<section id="content">-->
+				<section id="content">
                                     <!--<?php if (have_posts()) : ?><?php while (have_posts()) : the_post(); ?>
                                     <h2><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title(); ?>"><?php the_title(); ?></a></h2><small><?php the_time('F jS, Y') ?> by <?php the_author() ?> </small>
                                     <?php endwhile; ?>
@@ -17,5 +16,5 @@ get_header(); ?>
 //                                    echo $post->_content;
                                     the_content();
                                     ?>
-				<!--</section>-->
+				</section>
 <?php get_footer(); ?>

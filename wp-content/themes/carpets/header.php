@@ -9,9 +9,10 @@
         
         <?php wp_head(); ?>
         
-	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.min.js"></script>-->
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
+        <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/gallery.js"></script>
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.nstSlider.min.js"></script>
         <!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery-loader.js"></script>-->
@@ -28,61 +29,95 @@
 </head>
 <body>
 	<div id="wrapper">
-		<header id="header">
-			<div class="top-bar">
-				<div class="holder">
-					<form action="#" class="search-form">
-						<fieldset>
-							<input type="search" class="search" placeholder="SEARCH....">
-							<input type="submit" value="search">
-						</fieldset>
-					</form>
-					<div class="panel">
-						<div class="lang">
-							<a href="#" class="icon">Language</a>
-							<div class="drop">
-								<div class="list">
-									<ul>
-										<li class="active"><a href="#">ENG</a></li>
-										<li><a href="#">中文</a></li>
-										<li><a href="#">JAP</a></li>
-										<li><a href="#">KOR</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="currency">
-							<a href="#" class="icon">Currency</a>
-							<div class="drop">
-								<div class="list">
-									<ul>
-                                                                            <li><div class="tooltipster-content"><div class="scc_tooltip_settings">Select Currency</div></div></li>
-<!--										<li><a href="#">USD</a></li>
-										<li><a href="#">RMB</a></li>
-										<li><a href="#">YEN</a></li>
-										<li><a href="#">EURO</a></li>-->
-									</ul>
-								</div>
-							</div>
-						</div>
-                                                <?php if ( is_user_logged_in() ){ echo '<a href="' .wp_logout_url(). '" class="login">Log out</a>';}
-                                                else { echo '<a href="' .wp_login_url(). '" class="login">Log in</a>';}?>
-						<a href="<?php echo get_site_url(); ?>/cart" class="cart-bg"></a>
-					</div>
-					<strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
-				</div>
-			</div>
-			<nav id="nav">
-                            <?php wp_nav_menu( array( 'theme_location' => '' ) ); ?>
-<!--				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Collections</a></li>
-					<li><a href="#">Maintenance</a></li>
-					<li><a href="#">Testimonials</a></li>
-					<li><a href="#">Delivery</a></li>
-				</ul>-->
-			</nav>
-		</header>
+        <header id="header">
+            <div class="top-bar">
+                <div class="holder">
+                    <form action="#" class="search-form">
+                        <fieldset>
+                            <input type="search" class="search" placeholder="SEARCH....">
+                            <input type="submit" value="search">
+                        </fieldset>
+                    </form>
+                    <div class="panel">
+                        <div class="lang">
+                            <a href="#" class="icon">Language</a>
+                            <div class="drop">
+                                <div class="list">
+                                    <ul>
+                                        <li><a href="#">ENG</a></li>
+                                        <li><a href="#">中文</a></li>
+                                        <li><a href="#">JAP</a></li>
+                                        <li><a href="#">KOR</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="currency">
+                            <a href="#" class="icon">Currency</a>
+                            <div class="drop">
+                                <div class="list">
+                                    <ul>
+                                        <li><a href="#">SGD</a></li>
+                                        <li><a href="#">USD</a></li>
+                                        <li><a href="#">RMB</a></li>
+                                        <li><a href="#">YEN</a></li>
+                                        <li><a href="#">EURO</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="wp-admin" class="login">Log in</a>
+                        <a href="#" class="cart-bg">Cart</a>
+                    </div>
+                    <strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
+                    <!--<nav id="nav" class="add-nav">
+                        <a href="" class="opener">open</a>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Collections</a></li>
+                            <li><a href="#">Maintenance</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Delivery</a></li>
+                        </ul>
+                    </nav>-->
+                    <nav id="nav" class="add-nav">
+                        <a href="" class="opener">open</a>
+                    <?php
+                    $defaults = array(
+                        'container_class' => 'holder',
+                        'menu_class' => 'fnav',
+                        'menu'       => 'header-nav',
+                        'items_wrap'      => '<ul class="%2$s">%3$s</ul>'
+
+                    );
+
+                    wp_nav_menu( $defaults );
+                    ?>
+                    </nav>
+                </div>
+            </div>
+            <nav id="nav" class="main-nav">
+                <a href="" class="opener">open</a>
+                <!--<ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Maintenance</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Delivery</a></li>
+                </ul>-->
+                <?php
+                $defaults = array(
+                    'container_class' => 'holder',
+                    'menu_class' => 'fnav',
+                    'menu'       => 'header-nav',
+                    'items_wrap'      => '<ul class="%2$s">%3$s</ul>'
+
+                );
+
+                wp_nav_menu( $defaults );
+                ?>
+            </nav>
+        </header>
 		<section class="slider">
 			<div class="mask">
 				<div class="slideset">
