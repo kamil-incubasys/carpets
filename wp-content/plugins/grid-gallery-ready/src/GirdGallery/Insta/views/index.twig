@@ -1,0 +1,225 @@
+{% extends 'gird-gallery.twig' %}
+
+{% block content %}
+    {% include '@insta/includes/toolbar.twig' %}
+
+    <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Grid Gallery') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('insta', 'index') }}">{{ environment.translate('Instagram') }}</a>
+    </nav>
+
+    {% if images is iterable and images|length > 0 %}
+
+        <ul class="gg-photos" data-sortable data-container="block">
+            {% for image in images %}
+                <li class="gg-list-item" data-entity data-entity-type="photo"
+                    data-entity-info="{{ image|json_encode }}">
+                    <div class="gg-item" style="z-index: 10;">
+                        <div class="gg-check">
+                            <input type="checkbox" value="{{ image }}" class="gg-checkbox" data-observable>
+                        </div>
+                        <a data-colorbox href="{{ image }}">
+                            {% set sizes = { 'width': 60, 'height': 80 } %}
+                            <img class="ready-lazy" data-original="{{ image }}" width="150"
+                                 style="min-height:150px;max-height:150px;"/>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <p>Sorry, but you have no images on your instagram account</p>
+
+    {% endif %}
+
+    <script>
+        /*global jQuery*/
+        (function ($) {
+            jQuery(document).ready(function () {
+                var resources = [];
+                jQuery('#add_images').click(function () {
+                    var url = [];
+                    var elements = jQuery('.gg-checkbox:checked').each(function () {
+                        console.log(jQuery(this).val());
+                        url.push(jQuery(this).val());
+                    });
+                    if (elements.length) {
+                        ReadyGridGallery.Loader.show('Please, wait until images will be imported.');
+                        var request = ReadyGridGallery.Ajax.Post({
+                            module: 'insta',
+                            action: 'save'
+                        });
+
+                        request.add('urls', url);
+
+                        request.send(function (response) {
+                            if (response.msg == 'Loaded')
+                                ReadyGridGallery.Loader.hide();
+                            $.jGrowl('Done');
+                        });
+                    } else {
+                        $.jGrowl('Please select images for import');
+                    }
+                });
+
+                var button_select = jQuery('#button-select').click(function () {
+                    var checkboxes = jQuery('input:checkbox').each(function () {
+                        if (button_select.data('value') == 'select') {
+                            $(this).attr('checked', 'checked');
+                        } else {
+                            $(this).removeAttr('checked');
+                        }
+                    });
+                    if ($(this).data('value') == 'select') {
+                        $(this).data('value', 'remove');
+                    } else {
+                        $(this).data('value', 'select');
+                    }
+                });
+
+                jQuery('#button-refresh').click(function () {
+                    ReadyGridGallery.Loader.show('Please, wait until images will be refreshed.');
+                    var request = ReadyGridGallery.Ajax.Post({
+                        module: 'insta',
+                        action: 'refresh'
+                    });
+
+                    request.send(function (response) {
+                        var gg_photos = jQuery(document).find('.gg-photos');
+
+                        console.log(response.images);
+
+                        if (response.images) {
+                            response.images.forEach(function (image) {
+                                gg_photos.append(generateThumbnail(image));
+                            });
+                        }
+                        ReadyGridGallery.Loader.hide();
+                    });
+                });
+
+                function getAllCheckboxes() {
+                    var url = [];
+                    jQuery('.gg-checkbox').each(function () {
+                        url.push(jQuery(this).val());
+                    });
+                    return url;
+                }
+
+                function generateThumbnail(image) {
+                    var thumb =
+                            "<li class='gg-list-item' data-entity data-entity-type='photo' data-entity-info='{{ image|json_encode }}'>" +
+                            "<div class='gg-item' style='z-index: 10;'>" +
+                            "<div class='gg-check'>" +
+                            "<input type='checkbox' value=" + image + " class='gg-checkbox' data-observable>" +
+                            "</div>" +
+                            "<a data-colorbox href=" + image + ">" +
+                            "{% set sizes = { 'width': 60, 'height': 80 } %}" +
+                            "<img class='ready-lazy' data-original=" + image + " width='150' style='min-height:150px;max-height:150px;'/>" +
+                            "</a>" +
+                            "</div>" +
+                            "</li>";
+                    return thumb;
+                }
+
+                jQuery('#selectGalleryDialogInsta').dialog({
+                    modal: true,
+                    autoOpen: false,
+                    width: 350,
+                    buttons: {
+
+                        Add: function () {
+
+                            var galleryId = $('#galleryList').find(':selected').val(),
+                                    self = this;
+
+                            $.post(wp.ajax.settings.url, {
+                                action: 'gird-gallery',
+                                route: {module: 'galleries', action: 'attach'},
+                                gallery_id: galleryId,
+                                resources: resources
+                            }, function (response) {
+                                $.jGrowl(response.message);
+                                $(self).dialog('close');
+                            });
+                        },
+
+                        Cancel: function () {
+                            $(this).dialog('close');
+                        }
+
+                    },
+                    open: function (event, ui) {
+                        getResourcesList(resources);
+
+                        var list_request = ReadyGridGallery.Ajax.Post({
+                            module: 'insta',
+                            action: 'list'
+                        });
+                        list_request.send(function (response) {
+
+                            if (response.galleries) {
+
+                                $.each(response.galleries, function (i, v) {
+                                    $('#galleryList').append('<option value="' + v.id + '">' + v.title + '</option>');
+                                });
+
+                                $('#galleryLoading').hide();
+                                $('#galleryFormInsta').show();
+
+                            } else {
+                                console.log("Yes");
+                            }
+                        });
+                    },
+                    close: function (event, ui) {
+                        $('#galleryFormInsta').hide();
+                        $('#galleryList').html('');
+                    }
+                });
+
+            });
+
+            jQuery('#button-attach').click(function (event) {
+                event.preventDefault();
+
+                $('#selectGalleryDialogInsta').dialog('open');
+
+            });
+
+            function getResourcesList(resources) {
+
+                var url = [];
+                var elements = jQuery('.gg-checkbox:checked').each(function () {
+                    url.push(jQuery(this).val());
+                });
+                if (elements.length) {
+                    ReadyGridGallery.Loader.show('Please, wait until images will be imported.');
+                    var request = ReadyGridGallery.Ajax.Post({
+                        module: 'insta',
+                        action: 'save'
+                    });
+
+                    request.add('urls', url);
+
+                    request.send(function (response) {
+                        for (var i = 0; i < response.ids.length; ++i) {
+                            resources.push({type: 'photo', id: response.ids[i]});
+                        }
+                        if (response.msg == 'Loaded')
+                            ReadyGridGallery.Loader.hide();
+                        $.jGrowl('Done');
+                    });
+                } else {
+                    $.jGrowl('Please select images for import');
+                }
+                return resources;
+            }
+
+        })(jQuery)
+    </script>
+    {% include '@insta/includes/dialogs.twig' %}
+{% endblock %}

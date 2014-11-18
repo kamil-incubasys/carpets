@@ -1,0 +1,77 @@
+/* Container */
+.gird-gallery {}
+
+/* Remove normalize.css or/and theme styles from figure */
+.gird-gallery > a > figure {
+    margin: 0 !important;
+}
+
+.gird-gallery-fluid .grid-gallery-photos {
+    position: relarive;
+    top: 10px;
+}
+
+.grid-gallery-nav {
+    margin: 10px 0;
+}
+
+.grid-gallery-nav a {
+    -webkit-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    opacity: .7;
+    outline: none;
+}
+
+.grid-gallery-nav a:hover {
+    opacity: 1;
+}
+
+/* Pagination */
+.grid-gallery-pagination-wrap {
+    margin: 10px;
+}
+
+.grid-gallery-pagination-wrap .grid-gallery-page {
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-decoration: none !important;
+}
+
+/* Clearfix */
+.gird-gallery-clearfix:before,
+.gird-gallery-clearfix:after {
+    content:"";
+    display:table;
+}
+.gird-gallery-clearfix:after {
+    clear:both;
+}
+.gird-gallery-clearfix {
+    zoom:1;
+}
+
+
+/* Fluid grid */
+.gird-gallery-fluid > a > figure {
+    float: left !important;
+}
+
+/* Fixed */
+.gird-gallery-fixed a.gg-link {
+    float: left !important;
+    outline: none !important;
+    text-decoration: none !important;
+}
+
+.gird-gallery-fluid a.gg-link {
+    float: left !important;
+    outline: none !important;
+    text-decoration: none !important;
+}
+
+.gird-gallery a.gg-link:active,
+.gird-gallery a.gg-link:focus {
+    outline: none !important;
+}

@@ -13,7 +13,9 @@ Text Domain: twentyfourteen
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
-
+.gird-gallery-caption {
+    display: block !important;
+}
 * { max-height: 100000px; }
 html br{ display: none;}
 body {
@@ -1215,9 +1217,13 @@ overflow:hidden;
     display: inline-block;
     vertical-align: middle;
 }
+#wrapper .info-area:after{
+    content: '';
+    display: block;
+    clear: both;
+}
 #wrapper .info-area{
     padding: 20px 30px;
-    overflow: hidden;
     background: #f8f4e9;
     position: fixed;
     width: 100%;
@@ -1230,10 +1236,14 @@ overflow:hidden;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+#wrapper .info-area .holder:after{
+    display: block;
+    content: '';
+    clear: both;
+}
 #wrapper .info-area .holder{
     /*max-width: 980px;*/
     margin: 0 auto;
-    overflow: hidden;
     font-size: 11px;
     line-height: 14px;
 }
@@ -1246,7 +1256,31 @@ overflow:hidden;
 #wrapper .info-area .fnav li {
     float: left;
     margin: 0 25px 5px 0;
+    position: relative;
 }
+#wrapper .info-area .fnav li a{
+    cursor: pointer;
+}
+#wrapper .info-area .fnav li:hover .sub-menu{
+    display: block;
+    padding: 20px 25px 20px;
+}
+#wrapper .info-area .fnav li .sub-menu{
+    display:none;
+    position: absolute;
+    width: 150px;
+    z-index: 999999;
+    top:-88px;
+    left: -90%;
+    padding: 10px 25px;
+    background: url(assets/images/bg-opacity.png);
+}
+#wrapper .info-area .fnav li .sub-menu li{
+    display: block;
+    margin: 0 0 10px;
+    width: 100%;
+}
+
 #wrapper .info-area .info {
     display: block;
     overflow: hidden;
@@ -1255,6 +1289,7 @@ overflow:hidden;
 }
 #wrapper .info-area .info a {
     color: #000;
+    cursor: pointer;
 }
 
 @media only screen and (max-width:960px) {
@@ -1310,7 +1345,7 @@ overflow:hidden;
     #nav .opener{
         display: block;
         float: right;
-        background: url(../images/opener.png) no-repeat;
+        background: url(assets/images/opener.png) no-repeat;
         width: 22px;
         height: 20px;
         text-indent: -9999px;
@@ -1662,7 +1697,7 @@ overflow:hidden;
     left: 0;
     width: 40px;
     height: 480px;
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
 }
 #fancybox-overlay {
     position: absolute;
@@ -1722,7 +1757,7 @@ overflow:hidden;
     right: -15px;
     width: 30px;
     height: 30px;
-    background: transparent url(../images/fancybox/fancybox.png) -40px 0px;
+    background: transparent url(assets/images/fancybox/fancybox.png) -40px 0px;
     cursor: pointer;
     z-index: 1103;
     display: none;
@@ -1756,7 +1791,7 @@ overflow:hidden;
     width: 50%;
     cursor: pointer;
     outline: none;
-    background: transparent url(../images/fancybox/blank.gif);
+    background: transparent url(assets/images/fancybox/blank.gif);
     z-index: 1102;
     display: none;
 }
@@ -1778,11 +1813,11 @@ overflow:hidden;
     display: block;
 }
 #fancybox-left-ico {
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -30px;
 }
 #fancybox-right-ico {
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -60px;
 }
 #fancybox-left:hover, #fancybox-right:hover {
@@ -1808,50 +1843,50 @@ overflow:hidden;
     top: -20px;
     left: 0;
     width: 100%;
-    background-image: url(../images/fancybox/fancybox-x.png);
+    background-image: url(assets/images/fancybox/fancybox-x.png);
 }
 #fancybox-bg-ne {
     top: -20px;
     right: -20px;
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -162px;
 }
 #fancybox-bg-e {
     top: 0;
     right: -20px;
     height: 100%;
-    background-image: url(../images/fancybox/fancybox-y.png);
+    background-image: url(assets/images/fancybox/fancybox-y.png);
     background-position: -20px 0px;
 }
 #fancybox-bg-se {
     bottom: -20px;
     right: -20px;
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -182px;
 }
 #fancybox-bg-s {
     bottom: -20px;
     left: 0;
     width: 100%;
-    background-image: url(../images/fancybox/fancybox-x.png);
+    background-image: url(assets/images/fancybox/fancybox-x.png);
     background-position: 0px -20px;
 }
 #fancybox-bg-sw {
     bottom: -20px;
     left: -20px;
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -142px;
 }
 #fancybox-bg-w {
     top: 0;
     left: -20px;
     height: 100%;
-    background-image: url(../images/fancybox/fancybox-y.png);
+    background-image: url(assets/images/fancybox/fancybox-y.png);
 }
 #fancybox-bg-nw {
     top: -20px;
     left: -20px;
-    background-image: url(../images/fancybox/fancybox.png);
+    background-image: url(assets/images/fancybox/fancybox.png);
     background-position: -40px -122px;
 }
 #fancybox-title {
@@ -1879,7 +1914,7 @@ overflow:hidden;
 }
 #fancybox-title-over {
     padding: 10px;
-    background-image: url(../images/fancybox/fancy_title_over.png);
+    background-image: url(assets/images/fancybox/fancy_title_over.png);
     display: block;
 }
 .fancybox-title-float {
@@ -1899,18 +1934,18 @@ overflow:hidden;
 }
 #fancybox-title-float-left {
     padding: 0 0 0 15px;
-    background: url(../images/fancybox/fancybox.png) -40px -90px no-repeat;
+    background: url(assets/images/fancybox/fancybox.png) -40px -90px no-repeat;
 }
 #fancybox-title-float-main {
     color: #FFF;
     line-height: 29px;
     font-weight: bold;
     padding: 0 0 3px 0;
-    background: url(../images/fancybox/fancybox-x.png) 0px -40px;
+    background: url(assets/images/fancybox/fancybox-x.png) 0px -40px;
 }
 #fancybox-title-float-right {
     padding: 0 0 0 15px;
-    background: url(../images/fancybox/fancybox.png) -55px -90px no-repeat;
+    background: url(assets/images/fancybox/fancybox.png) -55px -90px no-repeat;
 }
 
 /* IE6 */

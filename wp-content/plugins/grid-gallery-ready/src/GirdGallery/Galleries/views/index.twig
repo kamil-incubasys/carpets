@@ -1,0 +1,173 @@
+{% extends 'gird-gallery.twig' %}
+
+{% block content %}
+
+    <section id="gg-galleries">
+
+        <section class="ready-bar" id="all-galleries-toolbar">
+            <ul class="ready-bar-controls">
+
+                <li>
+                    <button class="button button-primary" id="btn-add-new">
+                        <i class="fa fa-plus"></i> {{ environment.translate('Add new gallery') }}
+                    </button>
+                </li>
+
+            </ul>
+        </section>
+
+        <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+            <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Grid Gallery') }}</a>
+            <i class="fa fa-angle-right"></i>
+            <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Galleries') }}</a>
+        </nav>
+
+        {% if galleries is not defined %}
+            {# Show error here #}
+        {% else %}
+
+            <div class="gg-galleries-grid">
+
+                {% for gallery in galleries %}
+                    <div class="gg-item gg-gallery">
+                        <div class="image">
+                            {#<a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id }) }}">#}
+                            {% if gallery.settings.cover is not empty %}
+                                {% set cover = gallery.settings.cover %}
+                            {% else %}
+                                {% set coverData = get_image_src(gallery.photos[0].attachment.id, 'gg_gallery_thumbnail') %}
+                                {% set cover = coverData[0] %}
+                            {% endif %}
+
+                            {% if cover|length < 1 %}
+                                {% set cover = 'http://placehold.it/350x150&text=' ~ gallery.title %}
+                            {% endif %}
+                            <img src="{{ cover }}" alt="{{ gallery.title }}" height="150"/>
+                            {#</a>#}
+
+                            <!-- Control buttons -->
+                            <ul class="gg-control-btn">
+                                <li>
+                                    <a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id }) }}"
+                                       class="button">
+                                        {{ environment.translate('Images') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ environment.generateUrl('galleries', 'settings', { 'gallery_id': gallery.id }) }}"
+                                       class="button">
+                                        {{ environment.translate('Edit') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ environment.generateUrl('galleries', 'preview', { 'gallery_id': gallery.id }) }}"
+                                       class="button">
+                                        {{ environment.translate('Preview') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="gg-counter"
+                             title="{{ environment.translate('There are %s photos in the gallery %s')|format(gallery.photos|length, gallery.title) }}">
+                            <i class="fa fa-picture-o"></i>
+                            {{ gallery.photos|length }}
+                        </div>
+                        <p>
+                            <span style="float: left;">{{ gallery.title }}</span>
+                            <a class="delete-gallery" title="Delete this gallery" style="color: #e74c3c; float: right;"
+                               href="{{ environment.generateUrl('galleries', 'delete', { 'gallery_id': gallery.id }) }}">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </p>
+
+                        <p>
+                        <span title="{{ environment.translate('Select shortcode for the gallery ') ~ gallery.title }}"
+                             id="shortcode-{{ gallery.id }}}"
+                             class="gallery-shortcode">[gird-gallery id="{{ gallery.id }}"]</span>
+                        </p>
+                    </div>
+
+                {% else %}
+                    <h2 class="title">{{ environment.translate('You have not any galleries') }}</h2>
+                    <p>
+                        {{ environment.translate('You don\'t have any galleries yet.') }}
+                        <a href="{{ environment.config.get('ajax_url') }}"
+                           id="gg-create-gallery-link">{{ environment.translate('Want to create one right now?') }}</a>
+                    </p>
+
+                    <h3>{{ environment.translate('What is a gallery') }}</h3>
+                    <p>
+                        {{ environment.translate('<strong>Gallery</strong> &mdash; the highest type of entity in the Ready! Gird-Gallery.')|raw }}
+                        <br/>
+                        {{ environment.translate('You can have an unlimited number of galleries, to which you can attach the preloaded pictures and folders.') }}
+                        {{ environment.translate('Each gallery has a number of display settings and behaviors that you can save to presets and apply to other galleries.') }}
+                    </p>
+
+                    <h3>{{ environment.translate('Wanna know more?') }}</h3>
+                    {% set help = '<a href="#">' ~ environment.translate('Help') ~ '</a>' %}
+                    <p>{{ environment.translate('Visit %s section to read more information about the galleries.')|format(help)|raw }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+
+    {% macro putPreset(data) %}
+        <div class="preset {% if environment.isPro() == false and data.pro %}disabled{% endif %}"
+             data-preset="{{ data.value }}">
+            <p>{{ data.title|title }}</p>
+            <img src="{{ environment.getModule('galleries').getLocationUrl() }}/assets/img/{{ data.image }}" alt=""/>
+            {% if data.pro and environment.isPro() == false %}
+                <a class="button button-primary inPro"
+                    {% if data.title == 'Categories' %}
+                        href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=newcategories&utm_campaign=grid" target="_blank">
+                    {% endif %}
+                    {% if data.title == 'Icons' %}
+                        href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=newicons&utm_campaign=grid" target="_blank">
+                    {% endif %}
+                    {% if data.title == 'Pagination' %}
+                        href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=newpaginations&utm_campaign=grid" target="_blank">
+                    {% endif %}
+                    Available in PRO
+                </a>
+            {% endif %}
+        </div>
+    {% endmacro %}
+
+    <!-- Create dialog -->
+    <div id="gg-create-gallery-dialog" title="{{ environment.translate('Create new gallery') }}">
+        <div id="newGalleryAlert" style="color:red;display:none">
+            {{ environment.translate('Gallery title can\'t be empty!') }}
+        </div>
+        <div id="gg-create-gallery-text">
+            <label style="float: left; margin: 4px 5px 0 0;">{{ environment.translate('Gallery title:') }}</label>
+            <input name="title" type="text" style="float: left; width: 620px;"/>
+
+            <div class="clear"></div>
+            <input id="presetValue" name="preset" type="hidden" value="1"/>
+
+            <div class="presetSelect">
+                {% import _self as preset %}
+
+                {% set presets = [
+                {'title':'Default', 'image':'1-photo-gallery-default-settings.jpg', 'pro': false, 'value': 1},
+                {'title':'Fluid, Border, Caption', 'image':'2-photo-gallery-borders.jpg', 'pro': false, 'value': 2},
+                {'title':'Fluid, Shadow, Rounded', 'image':'3-round-cornerns.jpg', 'pro': false, 'value': 3},
+                {'title':'Categories', 'image':'4-categories.jpg', 'pro': true, 'value': 4},
+                {'title':'Icons', 'image':'5-icons.jpg', 'pro': true, 'value': 5},
+                {'title':'Pagination', 'image':'6-pagination_circle-gallery.jpg', 'pro': true, 'value': 6}
+                ] %}
+
+                {% for data in presets %}
+                    {{ preset.putPreset(data) }}
+                {% endfor %}
+            </div>
+        </div>
+        <div id="gg-create-gallery-loader" style="display: none;">
+            <p class="gg-centered">
+
+            <div class="gg-inline-loader gg-centered"></div>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

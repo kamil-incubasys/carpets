@@ -1,0 +1,7 @@
+<a id="back" style="margin-left:15px;display:none;"
+   href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery_id }) }}">
+    &larr; {{ environment.translate('Back to the gallery') }}
+</a>
+
+<iframe id="grid-gallery-preview" data-post="{{ post_id }}" src="{{ base_url }}/?p={{ post_id }}&preview=true"
+        frameborder="0" style="width:100%;margin: 5px 5px 5px -15px;min-height: 700px;overflow-y:hidden;"></iframe>

@@ -1,0 +1,24 @@
+{% extends '@photos/index.twig' %}
+
+{% block photos %}
+    <section id="gg-photos" data-intro="{{ manual.workspace }}" data-step="7">
+
+        <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+            <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Grid Gallery') }}</a>
+            <i class="fa fa-angle-right"></i>
+            <a href="{{ environment.generateUrl('photos', 'index', { 'view': view_type }) }}">{{ environment.translate('Images') }}</a>
+            <i class="fa fa-angle-right"></i>
+            <a href="#">{{ folder.title }}</a>
+        </nav>
+
+        {% import '@ui/type.twig' as view %}
+        {% set entity = { 'images': folder.photos } %}
+
+        {% if view_type == 'block' %}
+            {{ view.block_view(entity) }}
+        {% else %}
+            {{ view.list_view(entity) }}
+        {% endif %}
+        <div class="clear"></div>
+    </section>
+{% endblock %}

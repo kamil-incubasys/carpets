@@ -1,7 +1,5 @@
 <?php
-/*
-Template Name: index
-*/
+
 
 get_header(); ?>
 <?php get_sidebar('static'); ?>

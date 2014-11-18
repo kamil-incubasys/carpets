@@ -1,0 +1,20 @@
+{% extends 'gird-gallery.twig' %}
+
+{% block content %}
+
+    <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Grid Gallery') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('insta', 'authorization') }}">{{ environment.translate('Instagram') }}</a>
+    </nav>
+
+    <h2 id="gg-alrt" style="text-align: center; color: #bfbfbf; margin: 50px 0 25px 0;">
+		<span style="margin-bottom: 20px; display: block;">
+			{{ environment.translate('Upload your images from the Instagram Media Library') }}
+		</span>
+        <a class="button button-primary button-hero" href="{{ url }}">
+            <i class="fa fa-fw fa-instagram"></i>
+            {{ environment.translate('Upload from Instagram') }}
+        </a>
+    </h2>
+{% endblock %}

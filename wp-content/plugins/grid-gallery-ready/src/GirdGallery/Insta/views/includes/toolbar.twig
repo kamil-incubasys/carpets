@@ -1,0 +1,43 @@
+{# Toolbar #}
+<section id="photo-toolbar" class="ready-bar" data-intro="{{ manual.intro }}" data-step="1">
+    <ul class="ready-bar-controls">
+        <li title="{{ environment.translate('Upload new images') }}">
+            <button id="add_images" class="button button-primary">
+                <i class="fa fa-download"></i>
+                {{ environment.translate('Import images') }}
+            </button>
+        </li>
+        <li title="{{ environment.translate('Logout') }}">
+            <a class="button button-primary" href="{{ environment.generateUrl('insta', 'logout') }}">
+                <i class="fa fa-sign-out"></i>
+                {{ environment.translate('Logout') }}
+            </a>
+        </li>
+        <li class="separator">
+            |
+        </li>
+
+        <li title="{{ environment.translate('Select/unselect all photos') }}">
+            <button id="button-select" class="button" data-value="select" data-toolbar-button>
+                <i class="fa fa-check-square-o fa-fw"></i>
+            </button>
+        </li>
+
+        <li class="separator">|</li>
+
+        <li title="{{ environment.translate('Refresh Images List') }}">
+            <button class="button" id="button-refresh" data-enabled="one|many|all" data-toolbar-button>
+                {{ environment.translate('Refresh Images List') }}
+            </button>
+        </li>
+
+        <li class="separator">|</li>
+
+        <li title="{{ environment.translate('Add the selected items to the existing gallery') }}">
+            <button class="button" id="button-attach" data-toolbar-button>
+                {{ environment.translate('Add selected to the gallery') }}
+            </button>
+        </li>
+    </ul>
+</section>
+{# End of toolbar #}

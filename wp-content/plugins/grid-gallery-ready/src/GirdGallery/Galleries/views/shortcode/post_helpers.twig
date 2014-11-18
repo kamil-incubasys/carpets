@@ -1,0 +1,73 @@
+{% macro image(photo, settings) %}
+
+    {% set figureStyle %}
+        border: {{ settings.thumbnail.border.width }}px {{ settings.thumbnail.border.type }} {{ settings.thumbnail.border.color }};
+        border-radius: {{ settings.thumbnail.border.radius ~ settings.thumbnail.border.radius_unit|replace(['px', '%']) }};
+        margin: {{ settings.area.distance }}px !important;
+        background-color: rgb(228, 228, 228);
+        border: 1px solid white;
+        max-height: 400px;
+        {% if settings.use_shadow == 1 %}
+            box-shadow: {{ settings.thumbnail.shadow.x }}px {{ settings.thumbnail.shadow.y }}px {{ settings.thumbnail.shadow.blur }}px {{ settings.thumbnail.shadow.color }};
+        {% endif %}
+    {% endset %}
+
+    {% set aHref %}
+        {{ photo.url }}
+    {% endset %}
+
+        <a href="{{ aHref|trim }}">
+
+        <figure class="gird-gallery-caption" data-tags="{{ tags|trim|replace(' ', '_') }}" data-gird-gallery-type="{% if environment.isPro() and settings.icons.enabled == 'true' %}icons{% elseif settings.thumbnail.overlay.enabled == 'false' %}none{% else %}{{ settings.thumbnail.overlay.effect }}{% endif %}" style="display:none;{{ figureStyle|trim }}">
+            <div class="crop" style="{% if settings.area.grid == '0' %}width:{{ settings.area.photo_width ~ settings.area.photo_width_unit|replace(['px', '%']) }};height:{{ settings.area.photo_height ~ settings.area.photo_height_unit|replace(['px', '%']) }};overflow:hidden;{% endif %}">
+
+                {% set width, height, crop = 0, 0, 0 %}
+
+                {% if settings.area.photo_width_unit == 0 %}
+                    {% set width = settings.area.photo_width %}
+                {% endif %}
+
+                {% if settings.area.photo_height_unit == 0 %}
+                    {% set height = settings.area.photo_height %}
+                {% endif %}
+
+                {% if settings.area.grid == 0 %}
+                    {% set crop = 1 %}
+                {% endif %}
+
+            <img style="height: {{ height }}px;width: {{ width }}px"
+                    src="{{ photo.photo }}"
+            />
+            </div>
+
+            {% set postCropStyle %}
+                width: {{ width }}px;
+                height: {{ height }}px;
+                margin-left: 4px;
+            {% endset %}
+
+            {% set postTitleStyle %}
+                margin-top: 20px;
+                color: #000000;
+            {% endset %}
+
+            {% set postAuthorStyle %}
+                font-size: 10px;
+                color: #000000;
+            {% endset %}
+
+            {% set postContentStyle %}
+                font-size: 14px;
+                color: #2b2b2b;
+                text-align: center;
+            {% endset %}
+
+            <div class="post-feed-crop" style="{{ postCropStyle|trim }}">
+                <div class="post-feed-title" style="{{ postTitleStyle|trim }}"> {{ photo.title }}</div>
+                <div class="post-feed-author" style="{{ postAuthorStyle|trim }}"> {{ photo.author }} </div>
+                <div class="post-feed-date" style="{{ postAuthorStyle|trim }}"> {{ photo.date }} </div>
+                <div class="post-feed-content" style="{{ postContentStyle|trim }}"> {{ photo.content|slice(0,20)~"..." }} </div>
+            </div>
+        </figure>
+        </a>
+{% endmacro %}

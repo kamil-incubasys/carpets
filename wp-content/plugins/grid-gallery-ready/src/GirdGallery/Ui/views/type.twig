@@ -1,0 +1,292 @@
+{% macro list_view(entities) %}
+
+    {% import _self as view %}
+
+    {% set head %}
+    <tr>
+        <th scope="col" id="cb-select-all" class="manage-column check-column">
+            {#<input id="select-all" type="checkbox"/>#}
+        </th>
+        <th scope="col" id="icon" class="manage-column column-icon"></th>
+        <th scope="col" id="title" class="manage-column column-title">
+            {{ environment.translate('File') }}
+        </th>
+        <th scope="col" id="date" class="manage-column column-date">
+            {{ environment.translate('Date') }}
+        </th>
+    </tr>
+    {% endset %}
+
+    <table class="wp-list-table widefat fixed media" style="margin: 7px 0 7px -5px; ">
+        <thead>
+        {{ head }}
+        </thead>
+        <tfoot>
+        {{ head }}
+        </tfoot>
+        <tbody id="the-list" data-sortable data-container="list">
+        {% for folder in entities.folders %}
+            {{ view.list_folder(folder) }}
+        {% endfor %}
+        {% for image in entities.images %}
+            {{ view.list_image(image) }}
+        {% else %}
+            {# No images. #}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro block_view(entities) %}
+
+    {% import _self as view %}
+
+    <ul class="gg-photos" data-sortable data-container="block">
+        {% for folder in entities.folders %}
+            {{ view.block_folder(folder) }}
+        {% endfor %}
+
+        {% for image in entities.images %}
+            {{ view.block_image(image) }}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro block_folder(folder) %}
+    <li data-droppable class="gg-list-item" data-entity data-entity-id="{{ folder.id }}" data-entity-type="folder"
+        data-entity-info="{{ folder|json_encode }}">
+        <div class="gg-item" style="z-index: 0;">
+            <div class="gg-check">
+                <input type="checkbox" class="gg-checkbox" data-observable>
+            </div>
+            <a href="{{ environment.generateUrl('photos', 'view', { 'folder_id': folder.id, 'view': 'block' }) }}">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAADIAQMAAAAwS4omAAAAA1BMVEXk5+pYcSvrAAAAG0lEQVRIie3BMQEAAADCoPVPbQwfoAAAAIC3AQ+gAAEq5xQCAAAAAElFTkSuQmCC"
+                     alt="" width="150" height="150"/>
+
+                <div style="position: absolute; top: 55px; left: 55px; color: #bdc3c7;">
+                    <i class="fa fa-folder-open-o" style="font-size: 5em;"></i>
+                </div>
+
+                <div class="gg-folder-photos">
+                    <i class="fa fa-picture-o"></i> <span class="gg-folder-photos-num">{{ folder.photos|length }}</span>
+                </div>
+            </a>
+
+            <p>
+                <span class="folder-title">{{ folder.title|title }}</span>
+                <small>
+                    {{ folder.date }}
+                </small>
+            </p>
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro block_image(image) %}
+    <li class="gg-list-item" data-entity data-entity-id="{{ image.id }}" data-entity-type="photo"
+        data-entity-info="{{ image|json_encode }}">
+        <div class="gg-item" style="z-index: 10;">
+            <div class="gg-check">
+                <input type="checkbox" class="gg-checkbox" data-observable>
+            </div>
+            <a data-colorbox href="{{ image.attachment.sizes.full.url }}">
+                {% if image.attachment.sizes.thumbnail is empty %}
+                    {% set src = image.attachment.sizes.full.url %}
+                    {% if image.attachment.orientation == 'landscape' %}
+                        {% set sizes = { 'width': 80, 'height': 60 } %}
+                    {% else %}
+                        {% set sizes = { 'width': 60, 'height': 80 } %}
+                    {% endif %}
+                {% else %}
+                    {% set src = image.attachment.sizes.thumbnail.url %}
+                    {% set sizes = { 'width': 60, 'height': 60 } %}
+                {% endif %}
+                <img class="ready-lazy" data-original="{{ src }}" alt="{{ image.attachment.title }}" width="150"
+                     style="min-height:150px;max-height:150px;"/>
+            </a>
+
+            <p title="{{ image.attachment.title }}">
+                {{ image.attachment.title }}
+                <small>
+                    {{ image.attachment.dateFormatted }}
+                </small>
+            </p>
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro list_folder(folder) %}
+    <tr data-droppable data-entity data-entity-id="{{ folder.id }}" data-entity-type="folder"
+        data-entity-info="{{ folder|json_encode }}">
+        <th scope="row" class="check-column">
+            <label class="screen-reader-text"
+                   for="cb-select-{{ folder.id }}">{{ environment.translate('Select %s')|format(folder.title) }}</label>
+            <input type="checkbox" name="folder[]" id="cb-select-{{ folder.id }}" value="{{ folder.id }}"
+                   data-observable>
+        </th>
+        <td class="column-icon media-icon" style="position: relative;">
+            <a href="{{ environment.generateUrl('photos', 'view', { 'folder_id': folder.id, 'view': 'list' }) }}"
+               data-colorbox>
+                <img width="60" height="60"
+                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAADIAQMAAAAwS4omAAAAA1BMVEXk5+pYcSvrAAAAG0lEQVRIie3BMQEAAADCoPVPbQwfoAAAAIC3AQ+gAAEq5xQCAAAAAElFTkSuQmCC"
+                     class="attachment-80x60 ready-lazy" alt="{{ folder.title }}">
+            </a>
+
+            <div style="position: absolute; top: 20px; left: 31px; color: #bdc3c7; z-index: 100;">
+                <i class="fa fa-folder-open-o" style="font-size: 3em;"></i>
+            </div>
+        </td>
+        <td class="title column-title">
+            <strong>
+                <a href="{{ environment.generateUrl('photos', 'view', { 'folder_id': folder.id, 'view': 'list' }) }}">
+                    <span class="folder-title">{{ folder.title|title|raw }}</span>
+                </a>
+            </strong>
+
+            <p>
+                <span class="gg-folder-photos-num">
+                    {{ folder.photos|length }}
+                </span>
+                {% if folder.photos|length == 1 %}
+                    {{ environment.translate('photo') }}
+                {% else %}
+                    {{ environment.translate('photos') }}
+                {% endif %}
+            </p>
+        </td>
+        <td class="date column-date">{{ folder.date }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro list_image(image) %}
+    {% set nonProMsg = '<a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/" target="_blank" style="color:red;">Available in PRO</a>' %}
+
+    <tr data-entity data-entity-id="{{ image.id }}" data-entity-type="photo" data-entity-info="{{ image|json_encode }}">
+        <th scope="row" class="check-column">
+            <label class="screen-reader-text"
+                   for="cb-select-{{ image.id }}">{{ environment.translate('Select %s')|format(image.attachment.title) }}</label>
+            <input type="checkbox" name="image[]" id="cb-select-{{ image.id }}" value="{{ image.id }}" data-observable>
+        </th>
+        <td class="column-icon media-icon">
+            <a href="{{ image.attachment.sizes.full.url }}" data-colorbox>
+                {% if image.attachment.sizes.thumbnail is empty %}
+                    {% set src = image.attachment.sizes.full.url %}
+                    {% if image.attachment.orientation == 'landscape' %}
+                        {% set sizes = { 'width': 80, 'height': 60 } %}
+                    {% else %}
+                        {% set sizes = { 'width': 60, 'height': 80 } %}
+                    {% endif %}
+                {% else %}
+                    {% set src = image.attachment.sizes.thumbnail.url %}
+                    {% set sizes = { 'width': 60, 'height': 60 } %}
+                {% endif %}
+                <img width="{{ sizes.width }}" height="{{ sizes.height }}" data-original="{{ src }}"
+                     class="attachment-80x60 ready-lazy" alt="{{ image.attachment.title }}">
+            </a>
+        </td>
+        <td class="title column-title">
+            <form id="photo-editor-{{ image.id }}" class="photo-editor attachment-{{ image.attachment.id }}">
+                <strong data-tabcontent=".tabcontent-{{ image.id }}">
+                    <a href="#photo-caption-{{ image.id }}" class="add-new-h2 active">
+                        {{ environment.translate('Caption') }}
+                    </a>
+                    <a href="#photo-seo-{{ image.id }}" class="add-new-h2">
+                        {{ environment.translate('SEO') }}
+                    </a>
+                    <a href="#photo-link-{{ image.id }}" class="add-new-h2">
+                        {{ environment.translate('Link') }}
+                    </a>
+                    <a href="#photo-video-{{ image.id }}" class="add-new-h2">
+                        {{ environment.translate('Video') }}
+                    </a>
+                    <a href="#photo-tags-{{ image.id }}" class="add-new-h2">
+                        {{ environment.translate('Tags') }}
+                    </a>
+                </strong>
+
+                <p id="photo-caption-{{ image.id }}" class="tabcontent-{{ image.id }}">
+                    <input type="text" name="caption" value="{{ image.attachment.caption }}"
+                           placeholder="{{ environment.translate('Caption') }}"/>
+                </p>
+
+                <p id="photo-seo-{{ image.id }}" class="tabcontent-{{ image.id }}" style="display: none">
+                    <input type="text" name="description" value="{{ image.attachment.description }}"
+                           placeholder="{{ environment.translate('Description') }}"/>
+                    <input type="text" name="alt" value="{{ image.attachment.alt }}"
+                           placeholder="{{ environment.translate('Alternative text') }}"/>
+                </p>
+
+                <p id="photo-link-{{ image.id }}" class="tabcontent-{{ image.id }}" style="display: none">
+                    <input
+                            type="text"
+                            {% if environment.isPro() %}
+                                name="link"
+                                value="{{ image.attachment.external_link }}"
+                            {% else %}
+                                disabled="disabled"
+                            {% endif %}
+                            placeholder="{{ environment.translate('http://example.com/') }}"
+                            />
+                    <label>
+                        <input
+                                type="checkbox"
+                                {% if environment.isPro() %}
+                                    name="target"
+                                    value="_blank"
+                                {% else %}
+                                    disabled="disabled"
+                                {% endif %}
+                                {% if image.attachment.target == '_blank' %}
+                                    checked="checked"
+                                {% endif %}
+                                />
+                        {{ environment.translate('Open in new window.') }}
+                    </label>
+                    {% if environment.isPro() == false %}
+                        <br/>
+                        <span style="color:red" class="description">
+                            {{ nonProMsg|raw }}
+                        </span>
+                    {% endif %}
+                </p>
+
+                <p id="photo-video-{{ image.id }}" class="tabcontent-{{ image.id }}" style="display: none">
+                    <input
+                            type="text"
+                            {% if environment.isPro() %}
+                                name="video"
+                                value="{{ image.attachment.video }}"
+                            {% else %}
+                                disabled="disabled"
+                            {% endif %}
+                            placeholder="{{ environment.translate('Video URL') }}"
+                            >
+                    {% if environment.isPro() == false %}
+                        <br/>
+                        <span style="color:red" class="description">
+                            {{ nonProMsg|raw }}
+                        </span>
+                    {% endif %}
+                </p>
+
+                <p id="photo-tags-{{ image.id }}" class="tabcontent-{{ image.id }}" style="display:none;">
+                    {% if environment.isPro() == false %}
+                        <input type="text" style="width: 100%; margin-left:4px;">
+                        <span style="color:red" class="description">
+                            {{ nonProMsg|raw }}
+                        </span>
+                    {% else %}
+                        <input type="text" class="gg-tags" id="tags-{{ image.id }}" data-id="{{ image.id }}"
+                               value="{{ image.tags|join(',') }}">
+                    {% endif %}
+                </p>
+
+                <input name="attachment_id" value="{{ image.attachment.id }}" type="hidden"/>
+                <input name="action" value="gird-gallery" type="hidden"/>
+                <input name="route[module]" value="photos" type="hidden"/>
+                <input name="route[action]" value="updateAttachment" type="hidden"/>
+            </form>
+        </td>
+        <td class="date column-date">{{ image.attachment.dateFormatted }}</td>
+    </tr>
+{% endmacro %}

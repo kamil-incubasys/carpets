@@ -1,0 +1,740 @@
+{% extends 'gird-gallery.twig' %}
+
+{% block content %}
+
+    {% import '@core/form.twig' as form %}
+
+    <section class="ready-bar" id="single-gallery-toolbar">
+        <ul class="ready-bar-controls">
+
+            <li style="float: right;">
+                <button class="button button-primary" id="btnSave" form="form-settings">
+                    <i class="fa fa-fw fa-check"></i>
+                    {{ environment.translate('Save') }}
+                </button>
+            </li>
+
+            <li>
+                <a class="button button-primary"
+                   href="{{ environment.generateUrl('galleries', 'addImages', { 'gallery_id': gallery.id }) }}">
+                    <i class="fa fa-upload fa-fw"></i>
+                    {{ environment.translate('Add images') }}
+                </a>
+            </li>
+
+            <li>
+                <a class="button"
+                   href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id }) }}">
+                    <i class="fa fa-list fa-fw"></i>
+                    {{ environment.translate('Images list') }}
+                </a>
+            </li>
+
+            <li>
+                <a class="button" target="_blank"
+                   href="{{ environment.generateUrl('galleries', 'preview', { 'gallery_id': gallery.id }) }}">
+                    <i class="fa fa-fw fa-eye"></i>
+                    {{ environment.translate('Preview') }}
+                </a>
+            </li>
+
+            <li style="float: right;">
+                <a href="{{ environment.generateUrl('galleries', 'delete', { 'gallery_id': gallery.id }) }}"
+                   class="button delete">
+                    <i class="fa fa-fw fa-trash-o"></i>
+                    {{ environment.translate('Delete') }}
+                </a>
+            </li>
+
+        </ul>
+    </section>
+
+    <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Gird Gallery') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Galleries') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id }) }}">{{ gallery.title|default('?') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('galleries', 'settings', { 'gallery_id': gallery.id }) }}">
+            {{ environment.translate('Settings') }}
+        </a>
+    </nav>
+
+    <h2 class="form-tabs">
+        <a class="add-new-h2 change-tab" href="area">
+            {{ environment.translate('Area') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="border">
+            {{ environment.translate('Border') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="shadow">
+            {{ environment.translate('Shadow') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="overlay">
+            {{ environment.translate('Caption') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="box">
+            {{ environment.translate('Big image') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="icons">
+            {{ environment.translate('Icons') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="cats">
+            {{ environment.translate('Categories') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="pagination">
+            {{ environment.translate('Pagination') }}
+        </a>
+
+        <a class="add-new-h2 change-tab" href="quicksand">
+            {{ environment.translate('Images shuffling') }}
+        </a>
+
+        {#
+        <a class="add-new-h2 change-tab" href="post">
+            {{ environment.translate('Post feed') }}
+        </a>
+        #}
+
+        {% block tabs %}{% endblock %}
+
+        <a class="add-new-h2 change-tab" href="properties">
+            {{ environment.translate('Properties') }}
+        </a>
+    </h2>
+
+    {{ form.open('post', environment.generateUrl('galleries', 'saveSettings', { 'gallery_id': gallery.id }), { 'id': 'form-settings' }) }}
+    <input id="currentPresetTitle" name="title" type="hidden" value="{{ settings.title|default('') }}"/>
+
+    <table class="form-table" data-tab="area">
+        <thead>
+
+        {{ form.row(environment.translate('Grid'),
+        form.select('area[grid]', ['Fixed', 'Fluid'], settings.area.grid, { 'style': 'width: 300px;' }), 'grid-type') }}
+
+        {{ form.row(environment.translate('Overlay image with shadow'),
+        form.select('area[overlay]', ['No', 'Yes'], settings.area.overlay, { 'style': 'width: 300px;' }), 'overlay-type') }}
+
+        {{ form.row(environment.translate('Distance between photos'),
+        form.text('area[distance]', settings.area.distance, { 'style': { 'width': '205px' } })
+        ~ form.select('', ['pixels', 'percents'], null, { 'disabled': 'disabled', 'style': 'margin-top: -2px; height: 27px' }), 'distance') }}
+
+        {{ form.row(environment.translate('Gallery width'),
+        form.text('area[width]', settings.area.width, { 'style': { 'width': '205px' } })
+        ~ form.select('area[width_unit]', ['pixels', 'percents'], settings.area.width_unit, { 'style': 'margin-top: -2px; height: 27px;' }), 'area-width') }}
+
+        {{ form.row(environment.translate('Gallery height'),
+        form.text('area[height]', settings.area.height, { 'style': { 'width': '205px'} })
+        ~ form.select('', ['pixels', 'percents'], null, { 'disabled': 'disabled', 'style': 'margin-top: -2px; height: 27px' }), 'area-height') }}
+
+        {{ form.row(environment.translate('Photo width'),
+        form.text('area[photo_width]', settings.area.photo_width, { 'style': { 'width': '205px'} })
+        ~ form.select('area[photo_width_unit]', ['pixels', 'percents'], settings.area.photo_width_unit, { 'style': 'margin-top: -2px; height: 27px' }), 'photo-width') }}
+
+        {{ form.row(environment.translate('Photo height'),
+        form.text('area[photo_height]', settings.area.photo_height, { 'style': { 'width': '205px'} })
+        ~ form.select('area[photo_height_unit]', ['pixels', 'percents'], settings.area.photo_height_unit, { 'style': 'margin-top: -2px; height: 27px' }), 'photo-height') }}
+
+        </thead>
+    </table>
+
+    {% block quicksand %}
+        <div data-tab="quicksand">
+            <h1>
+                {{ environment.translate("Animation usage example") }}
+                <a class="add-new-h2" href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=shufling&utm_campaign=grid">Get
+                    PRO for 29$</a>
+            </h1>
+            <div>
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=shufling&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/quicksand1.png"
+                        width="532"/>
+                </a>
+            </div>
+            <div style="margin-top: 15px;">
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=shufling&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/quicksand2.png"/>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {#
+    {% block post %}
+        <div data-tab="post">
+            <table class="form-table">
+                <thead>
+
+                {{ form.row(environment.translate('Posts layout'),
+                form.select('posts[enable]', ['Enable', 'Disable'], settings.posts.enable, { 'style': 'width: 300px;' }), 'feed_enabled') }}
+
+                {{ form.row(environment.translate('Current posts'),
+                form.select('posts[current]', posts, settings.posts.current, { 'style': 'width: 300px;' })
+                ~ form.button('posts[add]', 'Add post', { 'class': 'button', 'style': 'width: 100px'}) , 'posts') }}
+
+                {{ form.row(environment.translate('Show author'),
+                form.select('posts[author]', ['No', 'Yes'], settings.posts.author, { 'style': 'width: 200px;' }), 'post_author') }}
+
+                {{ form.row(environment.translate('Show date'),
+                form.select('posts[date]', ['No', 'Yes'], settings.posts.date, { 'style': 'width: 200px;' }), 'posts_date') }}
+
+                {{ form.row(environment.translate('Show contents'),
+                form.select('posts[contents]', ['No', 'Yes'], settings.posts.contents, { 'style': 'width: 200px;' }), 'posts_contents') }}
+            </table>
+            <table class="wp-list-table widefat fixed media" style="margin: 4px 0 7px -5px">
+                {% include '@galleries/includes/toolbar.twig' %}
+                <thead>
+                <tr>
+                    <th scope="col" id="cb-select-all" class="manage-column check-column">
+                    </th>
+                    <th scope="col" id="author" class="manage-column column-author">
+                        {{ environment.translate('Post author') }}
+                    </th>
+                    <th scope="col" id="title" class="manage-column column-name">
+                        {{ environment.translate('Post title') }}
+                    </th>
+                    <th scope="col" id="comments" class="manage-column column-comments">
+                        {{ environment.translate('Number') }}
+                    </th>
+                    <th scope="col" id="date" class="manage-column column-date">
+                        {{ environment.translate('Post date') }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="the-list" data-sortable="" data-container="list" class="ui-sortable">
+                {% for post in postsRender %}
+                    <tr>
+                        <th scope="row" class="check-column">
+                            <label class="screen-reader-text"></label>
+                            <input type="checkbox" name="post[]" id="{{ post.id }}" data-observable="">
+                        </th>
+                        <td class="date column-author"> {{ post.author }} </td>
+                        <td class="date column-title"> {{ post.title }}</td>
+                        <td class="title column-comments"> {{ post.comments }} </td>
+                        <td class="title column-date">{{ post.date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+    #}
+
+    <table class="form-table" data-tab="border">
+        <thead>
+
+        {% set borderTypes = {
+        'solid': 'Solid',
+        'dotted': 'Dotted',
+        'dashed': 'Dashed',
+        'double': 'Double',
+        'none': 'None'
+        } %}
+
+        {{ form.row(environment.translate('Border type'),
+        form.select('thumbnail[border][type]', borderTypes, settings.thumbnail.border.type, { 'style': 'width: 300px;' }), 'border-type') }}
+
+        {{ form.row(environment.translate('Border color'), form.color('thumbnail[border][color]', settings.thumbnail.border.color|default('#fefefe'), { 'style': { 'width': '300px' } }), 'border-color') }}
+
+        {{ form.row(environment.translate('Border width'),
+        form.text('thumbnail[border][width]', settings.thumbnail.border.width, { 'style': { 'width': '205px'} })
+        ~ form.select('', ['pixels', 'percents'], null, { 'disabled': 'disabled', 'style': 'margin-top: -2px; height: 27px' }), 'border-width') }}
+
+        {{ form.row(environment.translate('Border radius'),
+        form.text('thumbnail[border][radius]', settings.thumbnail.border.radius, { 'style': { 'width': '205px'} })
+        ~ form.select('thumbnail[border][radius_unit]', ['pixels', 'percents'], settings.thumbnail.border.radius_unit, { 'style': 'margin-top: -2px; height: 27px' }), 'border-radius') }}
+
+        </thead>
+    </table>
+
+    <table class="form-table" data-tab="shadow">
+        <thead>
+
+        <tr id="useShadowRow">
+            <th scope="row">
+                {{ environment.translate('Use shadow') }}
+            </th>
+            <td>
+                <select id="useShadow" style="width:300px;" name="use_shadow">
+                    <option value="0" {% if settings.use_shadow == 0 %}selected="selected"{% endif %}>
+                        {{ environment.translate('No') }}
+                    </option>
+                    <option value="1" {% if settings.use_shadow == 1 %}selected="selected"{% endif %}>
+                        {{ environment.translate('Yes') }}
+                    </option>
+                </select>
+                <h4>{{ environment.translate('When mouse is over') }}</h4>
+                <select id="useMouseOverShadow" style="width:300px;" name="mouse_shadow">
+                    <option value="0" {% if settings.mouse_shadow == '0' %}selected="selected"{% endif %}>
+                        {{ environment.translate('No') }}
+                    </option>
+                    <option value="1" {% if settings.mouse_shadow == '1' %}selected="selected"{% endif %}>
+                        {{ environment.translate('Yes') }}
+                    </option>
+                </select>
+            </td>
+        </tr>
+
+        {{ form.row(environment.translate('Shadow color'),
+        form.color('thumbnail[shadow][color]', settings.thumbnail.shadow.color, { 'style': { 'width': '300px' } }), 'shadow-color') }}
+
+        {{ form.row(environment.translate('Shadow blur'),
+        form.text('thumbnail[shadow][blur]', settings.thumbnail.shadow.blur, { 'style': { 'width': '300px' } }), 'shadow-blur') }}
+
+        {{ form.row(environment.translate('Shadow X'),
+        form.text('thumbnail[shadow][x]', settings.thumbnail.shadow.x, { 'style': { 'width': '300px' } }), 'shadow-x') }}
+
+        {{ form.row(environment.translate('Shadow Y'),
+        form.text('thumbnail[shadow][y]', settings.thumbnail.shadow.y, { 'style': { 'width': '300px' } }), 'shadow-y') }}
+
+        </thead>
+    </table>
+
+    <table class="form-table" data-tab="overlay">
+        <thead>
+
+        {% set effects = {
+        'none': 'None',
+        'center': 'Middle',
+        'quarter-appear': 'Appear',
+        'quarter-slide-up': 'Quarter Slide Up',
+        'quarter-slide-side': 'Quarter Slide Side',
+        'quarter-fall-in': 'Quarter Fall in',
+        'quarter-two-step': 'Quarter Two-step',
+        'quarter-zoom': 'Quarter Caption Zoom',
+        'cover-fade': 'Cover Fade',
+        'cover-push-right': 'Cover Push Right',
+        'revolving-door-left': 'Revolving Door Left',
+        'revolving-door-right': 'Revolving Door Right',
+        'revolving-door-top': 'Revolving Door Top',
+        'revolving-door-bottom': 'Revolving Door Bottom',
+        'cover-slide-top': 'Cover Slide Top',
+        'offset': 'Caption Offset',
+        'guillotine-reverse': 'Guillotine Reverse',
+        'half-slide': 'Half Slide',
+        'sqkwoosh': 'Sqkwoosh',
+        'tunnel': 'Tunnel'
+        } %}
+
+        {# {{ form.row(environment.translate('Effect'),
+        form.select('thumbnail[overlay][effect]', effects, settings.thumbnail.overlay.effect|default('quarter-appear'), { 'style': 'width: 300px;' }), 'overlay-effect') }} #}
+        <tr>
+            <th scope="row">
+                <label for="captionEnabled">
+                    {{ environment.translate('Show caption') }}
+                </label>
+            </th>
+            <td>
+                <select id="captionEnabled" name="thumbnail[overlay][enabled]" style="width: 300px;">
+                    <option value="true"
+                            {% if settings.thumbnail.overlay.enabled == 'true' %}selected="selected"{% endif %}>{{ environment.translate('Yes') }}</option>
+                    <option value="false"
+                            {% if settings.thumbnail.overlay.enabled == 'false' %}selected="selected"{% endif %}>{{ environment.translate('No') }}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {{ environment.translate('Effect') }}
+            <td>
+            </th>
+                <span class="selectedEffectName" style="vertical-align: sub;">
+                    {{ settings.thumbnail.overlay.effect }}
+                </span>
+            <button id="chooseEffect" class="button" type="button">
+                {{ environment.translate('Choose effect') }}
+            </button>
+            <input type="hidden" id="overlayEffect" name="thumbnail[overlay][effect]"
+                   value="{{ settings.thumbnail.overlay.effect|default('quarter-appear') }}"/>
+            </td>
+        </tr>
+
+        {{ form.row(environment.translate('Background color'),
+        form.color('thumbnail[overlay][background]', settings.thumbnail.overlay.background), 'overlay-background') }}
+
+        {{ form.row(environment.translate('Text color'),
+        form.color('thumbnail[overlay][foreground]', settings.thumbnail.overlay.foreground), 'overlay-foreground') }}
+
+        {{ form.row(environment.translate('Transparency'),
+        form.select('thumbnail[overlay][transparency]',
+        ['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+        settings.thumbnail.overlay.transparency|default(9),
+        { 'style': 'width: 300px;' }), 'overlay-transparency') }}
+
+        {{ form.row(environment.translate('Text size'),
+        form.text('thumbnail[overlay][text_size]', settings.thumbnail.overlay.text_size, { 'style': { 'width': '205px'} })
+        ~ form.select('thumbnail[overlay][text_size_unit]', ['pixels', 'percents', 'ems'], settings.thumbnail.overlay.text_size_unit, { 'style': 'margin-top: -2px; height: 27px' }), 'text-size') }}
+
+        {{ form.row(environment.translate('Text align'),
+        form.select('thumbnail[overlay][text_align]', ['left', 'right', 'center', 'auto'], settings.thumbnail.overlay.text_align, { 'style': 'width: 300px;' }), 'text-align') }}
+
+
+        </thead>
+    </table>
+
+    <table class="form-table" data-tab="box">
+        <thead>
+
+        <tr>
+            <th scope="row">
+                {{ environment.translate('Theme') }}
+            </th>
+            <td>
+                <span class="themeName" style="vertical-align: sub;">
+                    {{ settings.box.theme|replace({ '_' : ' '})|title }}
+                </span>
+                <button class="button" type="button" id="chooseTheme">
+                    {{ environment.translate('Choose theme') }}
+                </button>
+                <input id="bigImageTheme" type="hidden" name="box[theme]" value="{{ settings.box.theme }}"/>
+            </td>
+        </tr>
+
+
+
+        {{ form.row(
+        environment.translate('Transition'),
+        form.select(
+        'box[transition]',
+        {
+        'elastic': environment.translate('Elastic'),
+        'fade': environment.translate('Fade'),
+        'none': environment.translate('None')
+        },
+        settings.box.transition,
+        {
+        'style': 'width: 300px',
+        },
+        'box-transition'
+        )
+        ) }}
+
+        {{ form.row(
+        environment.translate('Transition speed'),
+        form.text(
+        'box[speed]',
+        settings.box.speed,
+        {
+        'style': {
+        'width': '300px'
+        },
+        },
+        'box-speed'
+        )
+        ) }}
+
+        {{ form.row(
+        environment.translate('Close speed'),
+        form.text(
+        'box[fadeOut]',
+        settings.box.fadeOut,
+        {
+        'style': {
+        'width': '300px',
+        },
+        },
+        'box-fadeOut'
+        )
+        ) }}
+
+        {{ form.row(
+        environment.translate('Slideshow'),
+        form.select(
+        'box[slideshow]',
+        {
+        'false': environment.translate('Disabled'),
+        'true':  environment.translate('Enabled'),
+        },
+        settings.box.slideshow,
+        {
+        'style': 'width: 300px'
+        },
+        'box-slideshow'
+        )
+        ) }}
+
+        {{ form.row(
+        environment.translate('Slideshow speed'),
+        form.text(
+        'box[slideshowSpeed]',
+        settings.box.slideshowSpeed,
+        {
+        'style': {
+        'width': '300px',
+        },
+        },
+        'box-slideshowSpeed'
+        )
+        ) }}
+
+        {{ form.row(
+        environment.translate('Slideshow autostart'),
+        form.select(
+        'box[slideshowAuto]',
+        {
+        'true':  environment.translate('Yes'),
+        'false': environment.translate('No'),
+        },
+        settings.box.slideshowAuto,
+        {
+        'style': 'width: 300px',
+        },
+        'box-slideshowAuto'
+        )
+        ) }}
+
+        </thead>
+    </table>
+
+    <table class="form-table properties" data-tab="properties">
+        <thead>
+        <tr>
+            <th scope="row">
+                <label id="label-shortcode" for="shortcode">
+                    {{ environment.translate('Shortcode') }}
+                </label>
+            </th>
+            <td id="td-shortcode">
+                <input type="text" id="shortcode"
+                       value="[{{ environment.config.get('shortcode_name') }} id={{ gallery.id }}]" readonly/>
+
+                <p class="description">
+                    {{ environment.translate('Use this shortcode to insert the gallery "%s" on the pages or posts.')|format(gallery.title) }}
+                    <br/>
+                    {{ environment.translate('If you new to current feature, then you can read more about shortcodes in the <a href="http://en.support.wordpress.com/shortcodes/">official wordpress documentation</a>.')|raw }}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                <label id="cover">
+                    {{ environment.translate('Cover') }}
+                </label>
+            </th>
+            <td>
+                {% set defaultCover = get_image_src(gallery.photos[0].attachment.id, 'gg_gallery_thumbnail') %}
+                {% set currentCover = settings.cover %}
+
+                {% if currentCover is empty %}
+                    {% set currentCover = defaultCover[0] %}
+                {% endif %}
+
+                <input name="cover" type="hidden" value="{{ currentCover }}" id="coverUrl"/>
+
+                <ul class="covers">
+                    {% for photo in gallery.photos %}
+                        {% set cover = get_image_src(photo.attachment.id, 'gg_gallery_thumbnail') %}
+
+                        <li data-url="{{ cover[0] }}" class="{% if currentCover == cover[0] %}selected{% endif %}">
+                            <img src="{{ photo.attachment.sizes.thumbnail.url }}"/>
+                        </li>
+                    {% else %}
+
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        </thead>
+    </table>
+
+    {% block icons %}
+        <div data-tab="icons">
+            <h1>
+                {{ environment.translate("Icons' usage example") }}
+                <a class="add-new-h2" href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=icons&utm_campaign=grid">Get
+                    PRO for 29$</a>
+            </h1>
+
+            <div>
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=icons&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/icons1.jpg"
+                         width="526"/>
+                </a>
+            </div>
+            <div>
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=icons&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/icons2.jpg"/>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block categories %}
+        <div data-tab="cats">
+            <h1>
+                {{ environment.translate('Sort and orginize images with "Categories" option') }}
+                <a class="add-new-h2" href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=categories&utm_campaign=grid">Get
+                    PRO for 29$</a>
+            </h1>
+            <div>
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=categories&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/categories1.jpg"
+                    width="532"/>
+                </a>
+            </div>
+            <div style="margin-top: 15px;">
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=categories&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/categories2.jpg"/>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block pagination %}
+        <div data-tab="pagination">
+            <div>
+                <a href="http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/?utm_source=pro&utm_medium=pagination&utm_campaign=grid">
+                    <img src="{{ environment.module('galleries').getLocationUrl() }}/assets/img/pagination1.jpg"/>
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block form %}{% endblock %}
+
+    {{ form.close() }}
+
+    <div id="saveDialog" title="{{ environment.translate('Save settings as preset') }}">
+        <div>
+            <label for="presetTitle">
+                {{ environment.translate('Preset title:') }}
+            </label>
+        </div>
+        <div>
+            <input id="presetTitle" type="text" name="title" style="width:100%;" value="{{ preset.title }}"/>
+            <input id="settingsId" type="hidden" name="settings_id" value="{{ id }}"/>
+        </div>
+    </div>
+
+    <div id="deletePreset" title="{{ environment.translate('Delete preset') }}">
+        <p>
+            {{ environment.translate('Are you really want to delete preset "%s"?')|format(preset.title) }}
+        </p>
+        <input type="hidden" id="presetId" value="{{ preset.id }}">
+    </div>
+
+    <div id="loadPreset" title="{{ environment.translate('Load settings from presets') }}">
+        <div>
+            <label for="presetList">{{ environment.translate('Select preset:') }}</label>
+        </div>
+        <div>
+            <select id="presetList" name="presetList" style="width:100%"></select>
+        </div>
+        <div id="presetListError">
+            <p id="presetLoadingFailed" style="display:none">
+                {{ environment.translate('Failed to load the presets.') }}
+            </p>
+
+            <p id="presetEmpty" style="display:none">
+                {{ environment.translate('Currently you have no presets.') }}
+            </p>
+        </div>
+    </div>
+
+    <div id="themeDialog" title="{{ environment.translate('Select "Big image" theme') }}">
+        <div>
+            <label for="bigImageThemeSelect">
+                {{ environment.translate('Select a theme') }}
+            </label>
+        </div>
+        <div>
+            {% set bigImageThemes = {
+            'theme_1': 'Theme 1',
+            'theme_2': 'Theme 2',
+            'theme_3': 'Theme 3',
+            'theme_4': 'Theme 4',
+            'theme_5': 'Theme 5'
+            } %}
+
+            {% for value, name in bigImageThemes %}
+                <div style="float: left; {% if value == 'theme_2' or value == 'theme_4' %}margin-left: 15px;{% endif %}">
+                    <img data-name="{{ name }}" data-val="{{ value }}" style="cursor: pointer;" class="theme"
+                         src="{{ environment.getModule('colorbox').getThemeScreenshotUrl(value) }}" alt="{{ name }}"
+                         title="{{ name }}"/>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% set figcaptionStyle %}
+        border-radius: {{ settings.thumbnail.border.radius ~ settings.thumbnail.border.radius_unit|replace(['px', '%']) }};
+    {% if environment.isPro() and settings.icons is defined and settings.icons.enabled == 'true' %}
+        {% if settings.icons.overlay_enabled == 'true' %}
+            background-color:{{ settings.icons.overlay_color|default('#3498db') }};
+        {% endif %}
+    {% else %}
+        color:{{ settings.thumbnail.overlay.foreground }};
+        background-color:{{ settings.thumbnail.overlay.background }};
+        font-size:{{ settings.thumbnail.overlay.text_size }}{{ settings.thumbnail.overlay.text_size_unit|replace(['px', '%', 'em']) }};
+        {% if settings.thumbnail.overlay.text_align != 3 %}
+            text-align:{{ settings.thumbnail.overlay.text_align|replace(['left', 'right', 'center']) }};
+        {% endif %}
+        {% if settings.thumbnail.overlay.effect == 'none' or settings.thumbnail.overlay.enabled == 'false' %}
+            opacity:1;
+            bottom:0;
+        {% endif %}
+    {% endif %}
+    {% endset %}
+
+    <div id="effectDialog" title="{{ environment.translate('Select overlay effect') }}">
+        <div id="effectsPreview" style="margin-top: 10px;">
+            {% for type, name in effects %}
+                <figure class="gird-gallery-caption" data-gird-gallery-type="{{ type }}">
+                    <img src="//placehold.it/150&text={{ name }}"/>
+                    <figcaption style="{{ figcaptionStyle|trim }}">
+                        <div class="gird-gallery-figcaption-wrap">
+                            <span>{{ name }}</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% block modals %}{% endblock %}
+
+    <div class="gallery-preview-title">
+        <h4>
+            <div class="switch-label">{{ environment.translate('Live preview') }}</div>
+            <div class="switch">
+                <input id="cmn-preview" class="cmn-toggle cmn-toggle-round" type="checkbox" checked>
+                <label for="cmn-preview"></label>
+            </div>
+        </h4>
+    </div>
+
+    <div id="preview" class="gallery-preview" style="display:none;">
+        {#<a class="hidePreview" href="#">&times;</a>#}
+        <figure class="gird-gallery-caption" data-gird-gallery-type="center">
+            {% if gallery.settings.cover is not empty %}
+                {% set cover = gallery.settings.cover %}
+            {% else %}
+                {% set coverData = get_image_src(gallery.photos[0].attachment.id, 'gg_gallery_thumbnail') %}
+                {% set cover = coverData[0] %}
+            {% endif %}
+
+            {% if cover|length < 1 %}
+                {% set cover = 'http://placehold.it/350x150&text=' ~ gallery.title %}
+            {% endif %}
+            <img src="{{ cover }}" alt="{{ gallery.title }}"/>
+            <figcaption style="{{ figcaptionStyle|trim }}">
+                <div class="gird-gallery-figcaption-wrap">
+                    <span>Ready! Grid Gallery</span>
+                </div>
+            </figcaption>
+        </figure>
+        <small style="left:25px;position:absolute;top:10px;display:none;">Oops! Transparency doesn't work in live
+            preview.
+        </small>
+    </div>
+
+{% endblock %}

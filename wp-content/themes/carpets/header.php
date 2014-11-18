@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="wp-admin" class="login">Log in</a>
+                        <a href="wp-login" class="login">Log in</a>
                         <a href="#" class="cart-bg">Cart</a>
                     </div>
                     <strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>

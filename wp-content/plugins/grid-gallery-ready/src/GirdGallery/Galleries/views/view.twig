@@ -1,0 +1,110 @@
+{% extends 'gird-gallery.twig' %}
+
+{% block content %}
+
+    <section class="ready-bar" id="single-gallery-toolbar">
+        <ul class="ready-bar-controls">
+
+            <li>
+                <a href="{{ environment.generateUrl('galleries', 'addImages', { 'gallery_id': gallery.id }) }}"
+                   class="button button-primary">
+                    <i class="fa fa-fw fa-upload"></i> {{ environment.translate('Add images') }}
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ environment.generateUrl('galleries', 'settings', { 'gallery_id': gallery.id }) }}"
+                   class="button">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    {{ environment.translate('Properties') }}
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank"
+                   href="{{ environment.generateUrl('galleries', 'preview', { 'gallery_id': gallery.id }) }}"
+                   class="button" data-button="preview">
+                    <i class="fa fa-fw fa-eye"></i>
+                    {{ environment.translate('Preview') }}
+                </a>
+            </li>
+
+            <li class="separator">|</li>
+
+            <li>
+                <button class="button" data-button="checkAll">
+                    <i class="fa fa-fw fa-check"></i> Check all
+                </button>
+            </li>
+
+            <li>
+                <button class="button" data-button="remove" disabled>
+                    <i class="fa fa-fw fa-trash-o"></i>
+                    {{ environment.translate('Delete image') }}
+                </button>
+            </li>
+
+            {% if viewType == 'block' %}
+                <li style="float: right;" title="{{ environment.translate('Switch to the list view') }}">
+                    <a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id, 'view': 'list' }) }}"
+                       class="button">
+                        <i class="fa fa-fw fa-list"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if viewType == 'list' %}
+                <li style="float:right;" title="{{ environment.translate('Switch to the block view') }}">
+                    <a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id, 'view': 'block' }) }}"
+                       class="button">
+                        <i class="fa fa-fw fa-th"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </section>
+
+    <nav id="gg-breadcrumbs" class="gg-breadcrumbs">
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Ready! Grid Gallery') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('galleries') }}">{{ environment.translate('Galleries') }}</a>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ environment.generateUrl('galleries', 'view', { 'gallery_id': gallery.id }) }}">{{ gallery.title }}</a>
+    </nav>
+
+    {% if gallery is not defined or gallery is null %}
+
+        <p>{{ environment.translate('The gallery is does not exists') }}</p>
+
+    {% else %}
+
+        {% if gallery.photos is empty %}
+
+            <h2 style="text-align: center; color: #bfbfbf; margin: 50px 0 25px 0;">
+            <span style="margin-bottom: 20px; display: block;">
+                {{ environment.translate('Currently this gallery has no images') }}
+            </span>
+                <a id="addImg"
+                   href="{{ environment.generateUrl('galleries', 'addImages', { 'gallery_id': gallery.id }) }}"
+                   class="button button-primary button-hero">
+                    {{ environment.translate('Add images') }}
+                </a>
+            </h2>
+
+        {% else %}
+
+            {% import '@ui/type.twig' as view %}
+            {% set entity = { images: gallery.photos } %}
+
+            {% if viewType == 'block' %}
+                {{ view.block_view(entity) }}
+            {% endif %}
+
+            {% if viewType == 'list' %}
+                {{ view.list_view(entity) }}
+            {% endif %}
+
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
