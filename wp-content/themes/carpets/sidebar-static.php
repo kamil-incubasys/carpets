@@ -1,4 +1,4 @@
-				<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout') ):?>
+				<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout')&& !is_page('faq') && !is_page('gallery')&& !is_page('interior-design')&& !is_page('login')&& !is_page('maintenance')&& !is_page('terms-and-conditions') ):?>
                                 <aside id="sidebar">
                                     <?php if (is_page('design')):?>
                                     	<h3>NEED AN EXPERT OPINION?</h3>
@@ -42,5 +42,10 @@
                                     <?php endif; ?>
 				</aside>
                                 <?php endif; ?>
+                <?php if ( is_active_sidebar( 'home_right_2' ) ) : ?>
+                    <div id="secondary-sidebar">
+                        <?php dynamic_sidebar( 'home_right_2' ); ?>
+                    </div>
+                <?php endif; ?>
 <?php // wp_list_categories(); ?>
 <?php // wp_list_pages(); ?>

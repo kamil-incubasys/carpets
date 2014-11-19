@@ -7,7 +7,7 @@
  * Author: gallery plugin ready
  * Author URI: http://readyshoppingcart.com/product/grid-gallery-wordpress-plugin-ready/
  **/
-
+error_reporting(0);
 require_once dirname(__FILE__) . '/app/ReadyGirdGallery.php';
 
 $readyGirdGallery = new ReadyGirdGallery();

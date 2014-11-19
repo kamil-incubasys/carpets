@@ -13,7 +13,7 @@ function arphabet_widgets_init() {
 		'before_title' => '<h3 class="rounded">',
 		'after_title' => '</h3>',//border-bottom: 1px solid #bcbcbc
 	) );
-        register_sidebar( array(
+    register_sidebar( array(
 		'name' => 'Home right sidebar',
 		'id' => 'home_right_2',
 		'before_widget' => '<div>',

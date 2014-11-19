@@ -71,15 +71,16 @@
     {% endset %}
 
     {% if environment.isPro() == false or settings.icons is not defined or settings.icons.enabled == 'false' %}
-        <a
+        <!--<a
             class="gg-link {{ aClass|trim }}"
             href="{{ aHref|trim }}"
             target="{{ photo.attachment.target|default('_self') }}"
             title="{{ aTitle|trim }}"
-        >
+        >-->
     {% endif %}
-        <figure class="gird-gallery-caption" data-tags="{{ tags|trim|replace(' ', '_') }}" data-gird-gallery-type="{% if environment.isPro() and settings.icons.enabled == 'true' %}icons{% elseif settings.thumbnail.overlay.enabled == 'false' %}none{% else %}{{ settings.thumbnail.overlay.effect }}{% endif %}" style="display:none;{{ figureStyle|trim }}">
-            <div class="crop" style="{% if settings.area.grid == '0' %}width:{{ settings.area.photo_width ~ settings.area.photo_width_unit|replace(['px', '%']) }};height:{{ settings.area.photo_height ~ settings.area.photo_height_unit|replace(['px', '%']) }};overflow:hidden;{% endif %}">
+    <!--<figure class="gird-gallery-caption" data-tags="{{ tags|trim|replace(' ', '_') }}" data-gird-gallery-type="{% if environment.isPro() and settings.icons.enabled == 'true' %}icons{% elseif settings.thumbnail.overlay.enabled == 'false' %}none{% else %}{{ settings.thumbnail.overlay.effect }}{% endif %}" style="display:none;{{ figureStyle|trim }}">
+            <div class="crop img-hold" style="{% if settings.area.grid == '0' %}width:{{ settings.area.photo_width ~ settings.area.photo_width_unit|replace(['px', '%']) }};height:{{ settings.area.photo_height ~ settings.area.photo_height_unit|replace(['px', '%']) }};overflow:hidden;{% endif %}">-->
+            <div class="img-hold">
 
                 {% set width, height, crop = 0, 0, 0 %}
 
@@ -97,11 +98,13 @@
                     {% set height = null %}
                 {% endif %}
 
-            <img
-                    src="{{ get_attachment(photo.attachment.id, width, height, crop) }}"
+            <a href="{{ get_attachment(photo.attachment.id) }}" rel="lightbox">
+                <img
+                    src="{{ get_attachment(photo.attachment.id,600,600,1) }}"
                     alt="{% if photo.attachment.alt is not empty %}{{ photo.attachment.alt }}{% else %}{{ photo.attachment.title }}{% endif %}"
                     title="{% if photo.attachment.description is not empty %}{{ photo.attachment.description }}{% else %}{{ photo.attachment.title }}{% endif %}"
             />
+            </a>
             </div>
 
             {% set figcaptionStyle %}
@@ -133,8 +136,8 @@
                 {% endif %}
             {% endset %}
 
-            <figcaption data-alpha="{{ figcaptionAlpha|trim }}" style="{{ figcaptionStyle|trim }}" >
-                <div class="gird-gallery-figcaption-wrap">
+            <!--<figcaption data-alpha="{{ figcaptionAlpha|trim }}" style="{{ figcaptionStyle|trim }}" >
+                <div class="gird-gallery-figcaption-wrap">-->
                     {% if environment.isPro() and settings.icons is defined and settings.icons.enabled == 'true' %}
                         <div class="hi-icon-wrap {{ settings.icons.effect[0:length-1] }} {{ settings.icons.effect }}" data-margin="{{ settings.icons.margin|default(5) }}">
                             {% if photo.attachment.video is defined and photo.attachment.video is not empty %}
@@ -169,7 +172,7 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                    {% if environment.isPro() == false or settings.icons is not defined or settings.icons.enabled == 'false' %}
+                    {#{% if environment.isPro() == false or settings.icons is not defined or settings.icons.enabled == 'false' %}
                         {% if settings.thumbnail.overlay.enabled == 'true' %}
                             {% if photo.attachment.caption is not empty %}
                                 <span>{{ photo.attachment.caption }}</span>
@@ -177,11 +180,11 @@
                                 <span>{{ photo.attachment.title }}</span>
                             {% endif %}
                         {% endif %}
-                    {% endif %}
-                </div>
-            </figcaption>
-        </figure>
+                    {% endif %}#}
+    <!--</div>
+</figcaption>
+</figure>-->
     {% if environment.isPro() == false or settings.icons is not defined or settings.icons.enabled == 'false' %}
-        </a>
+        <!--</a>-->
     {% endif %}
 {% endmacro %}

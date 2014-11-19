@@ -9,10 +9,10 @@
         
         <?php wp_head(); ?>
         
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!--	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.min.js"></script>-->
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
-        <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/gallery.js"></script>
+<!--        <script type="text/javascript" src="--><?php //bloginfo('template_directory') ?><!--/assets/js/gallery.js"></script>-->
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
         <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.nstSlider.min.js"></script>
         <!--<script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery-loader.js"></script>-->
@@ -44,10 +44,6 @@
                             <div class="drop">
                                 <div class="list">
                                     <ul>
-                                        <li><a href="#">ENG</a></li>
-                                        <li><a href="#">中文</a></li>
-                                        <li><a href="#">JAP</a></li>
-                                        <li><a href="#">KOR</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,29 +53,23 @@
                             <div class="drop">
                                 <div class="list">
                                     <ul>
-                                        <li><a href="#">SGD</a></li>
-                                        <li><a href="#">USD</a></li>
-                                        <li><a href="#">RMB</a></li>
-                                        <li><a href="#">YEN</a></li>
-                                        <li><a href="#">EURO</a></li>
+                                        <li><a href="CN" class="switch_currency">CNY</a></li>
+                                        <li><a href="RE" class="switch_currency">EUR</a></li>
+                                        <li><a href="JP" class="switch_currency">JPY</a></li>
+                                        <li><a href="SG" class="switch_currency">SGD</a></li>
+                                        <li><a href="US" class="switch_currency">USD</a></li>
+                                        <li><div class="tooltipster-content"><div class="scc_tooltip_settings">More ...</div></div></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <a href="wp-login" class="login">Log in</a>
-                        <a href="#" class="cart-bg">Cart</a>
+                        <?php if ( is_user_logged_in() ){ echo '<a href="' .wp_logout_url(). '" class="login">Log out</a>';}
+                        else { echo '<a href="' .wp_login_url(). '" class="login">Log in</a>';}?>
+                        <a href="<?php echo get_site_url(); ?>/cart" class="cart-bg"></a>
+
                     </div>
                     <strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
-                    <!--<nav id="nav" class="add-nav">
-                        <a href="" class="opener">open</a>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Collections</a></li>
-                            <li><a href="#">Maintenance</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Delivery</a></li>
-                        </ul>
-                    </nav>-->
+
                     <nav id="nav" class="add-nav">
                         <a href="" class="opener">open</a>
                     <?php
@@ -98,13 +88,7 @@
             </div>
             <nav id="nav" class="main-nav">
                 <a href="" class="opener">open</a>
-                <!--<ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Collections</a></li>
-                    <li><a href="#">Maintenance</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Delivery</a></li>
-                </ul>-->
+
                 <?php
                 $defaults = array(
                     'container_class' => 'holder',

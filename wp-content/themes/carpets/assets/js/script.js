@@ -1,3 +1,8 @@
+function languageclick(element)
+{
+    console.log(jQuery(element).find('span'));
+}
+
 (function($){
 $(document).ready(function () {
     var categoryHtml = '';
@@ -18,15 +23,15 @@ $(document).ready(function () {
         $( 'div.related' ).remove();
         $( '#related_products' ).html(code);
     }
-    console.log(code);
+    //console.log(code);
 
     code = $('div.images div.thumbnails').html();
-    console.log(code);
+    //console.log(code);
 
     var src = siteUrl + '/wp-content/plugins/woocommerce/assets/images/placeholder.png';
     if (code === undefined) {
         code = $( 'div.slide div.images' ).html();
-        console.log(code);
+        //console.log(code);
         $( 'div#product_images div.slide' ).html(code);
         $( 'div#product_images' ).append('<div class="slide"><img src="' + src + '" alt=""></div><div class="slide"><img src="' + src + '" alt=""></div><div class="slide"><img src="' + src + '" alt=""></div>');
         $( '#gallery_links' ).append('<li><a href="#"><img src="' + src + '" alt=""></a></li><li><a href="#"><img src="' + src + '" alt=""></a></li><li><a href="#"><img src="' + src + '" alt=""></a></li>');
@@ -34,29 +39,31 @@ $(document).ready(function () {
     }
     else {
         code = $( 'div.slide div.images a' ).html();
-        console.log(code);
+        //console.log(code);
         $( 'div#product_images div.slide' ).append('<div class="slide">' + code + '</div>');
         $( '#gallery_links li' ).first().html('<a href="#">' + code + '</a>');
         code = $( 'div.slide div.images div.thumbnails' ).html();
-        console.log(code);
+        //console.log(code);
         $( 'div.slide div.images div.thumbnails a.zoom' ).each(function () {
             code = $( this ).html();
-            console.log(code);
+            //console.log(code);
             $( 'div#product_images' ).append('<div class="slide">' + code + '</div>');
             $( '#gallery_links' ).append('<li><a href="#">' + code + '</a></li>');
         });
        $( 'div#product_images div.slide div.images' ).remove();
     }
     initCarousel();
+    initOpenClose1();
+    initOpenClose2();
     
     code = $( 'div.cart-collaterals tr.cart-subtotal span.amount' ).html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         $( 'div.subtotal-area div.sub-wrap div.data span' ).first().html(code);
     }
     
     code = $( 'div.cart-collaterals tr.order-total span.amount' ).html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         $( 'div.total-area div.sub-wrap div.data span' ).first().html('<strong>' + code + '</strong>');
     }
@@ -66,7 +73,7 @@ $(document).ready(function () {
     $( '.payment_method_paypal img' ).css('width', '70px');
 
     code = $( 'ul.product-categories' ).html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         var html = '<div class="category_checkboxes">';
         $( 'ul.product-categories' ).children('li').each(function(i, obj){
@@ -103,10 +110,10 @@ $(document).ready(function () {
 
                         //Traverse here for more children in a common html structure with recursion
                         //$( this ).children('ul').children('li').each(function(i, obj){});
-                        console.log('LOADED----------------------------------------');
+                        //console.log('LOADED----------------------------------------');
                         categoryHtml = '';
                         categoryHtml = makeSubCategories($( this ));
-                        console.log('L-----------------------------' + categoryHtml + '-------------------L');
+                        //console.log('L-----------------------------' + categoryHtml + '-------------------L');
                         html += categoryHtml;
                         html += '</li>';
                     });
@@ -143,7 +150,7 @@ $(document).ready(function () {
     }
     
     code = $( '#searchform' ).parent('div').html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         $( '#searchform' ).remove();
         $( '.search-form' ).replaceWith(code);
@@ -154,7 +161,7 @@ $(document).ready(function () {
     }
     
     code = $( 'nav.woocommerce-breadcrumb' ).html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         var html = '<div class="breadcrumbs"><ul>';
         $( 'nav.woocommerce-breadcrumb' ).find('a').each(function(){
@@ -168,16 +175,16 @@ $(document).ready(function () {
     }
     
     $( 'div.select-wrap input' ).first().after('');
-    $( 'div.select-wrap input' ).attr('style', 'width: 46px !important;');
+    $( 'div.select-wrap input' ).attr('style', 'width: 86px !important;');
     
     var width = '';
     var height = '';
     $( '.wp-post-image' ).each(function(i, obj){
             height = $( this ).attr('height');
             
-            if (parseInt(height) < 150){
+           /* if (parseInt(height) < 150){
                 $( this ).css('height', '161px');
-            }
+            }*/
     });
     
     var categoryCookie = getCookie('selectedCategory');
@@ -199,7 +206,7 @@ $(document).ready(function () {
     $( '.woocommerce-result-count' ).after($( '.form-wppp-select' ));
     
     code = $( 'div.price_slider_wrapper' ).html();
-    console.log(code);
+    //console.log(code);
     if (code !== undefined){
         var form = $( 'div.price_slider_wrapper' ).parent('form');
         var min = $( '#min_price' ).data('min');
@@ -314,6 +321,7 @@ $(document).ready(function () {
         return false;
     }
 
+
     function deleteCookie(key)
     {
         var now = new Date();
@@ -323,5 +331,41 @@ $(document).ready(function () {
         document.cookie = "expires=" + now.toUTCString() + ";"
 //        alert("Deleting Cookies : " + key + "=" + cookievalue );
     }
+
+
+    $(window).on('load',function(){
+        $( '.goog-te-banner-frame').hide();
+        var language_widget=jQuery('#primary-sidebar').find('#google_translate_element').html();
+        jQuery('.panel').append('<div id="google_translate_carpets"></div>');
+        $( '#google_translate_carpets').replaceWith($( '#google_translate_element' ));
+        $( '#google_translate_element').hide();
+        $('.lang ul').html('');
+        $.each(jQuery('.goog-te-menu-frame').eq(0).contents().find('table td a'),function(k,v){
+
+            var obj = $( this );
+            $('.lang ul').append('<li><a href="javascript:">' + $(this).find('span').eq(1).html() + '</a></li>');
+            $('.lang ul li').last().bind('click',function(){
+                obj[0].click();
+               $( '.goog-te-banner-frame').hide();
+            });
+
+        });
+
+        $('.lang ul li').first().remove();
+        jQuery('#header .panel .drop .list').css('width','150%');
+
+        setTimeout(function(){
+            $( '.scc_tooltip_settings' ).click(function(){jQuery(".scc_configpop").bPopup({closeClass:"scc_closeBtn"});});
+            $( '.scc_settings_icon' ).remove();
+
+            $( '.switch_currency' ).click(function(e){
+                e.preventDefault();
+
+
+                $( '#scc_currencySelect' ).val($( this ).attr('href'));
+                $( '.scc_upd' ).click();
+            });
+        }, 1000);
+    });
 });
 })(jQuery);

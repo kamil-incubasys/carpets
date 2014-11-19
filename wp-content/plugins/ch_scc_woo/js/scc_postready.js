@@ -96,7 +96,8 @@ var scc_init_popups = function(){
 
 var jscc_options = {
 
-	replaceOriginalPrice : settings.replaceOriginalPrice==='1',
+//	replaceOriginalPrice : settings.replaceOriginalPrice==='1',
+    replaceOriginalPrice : true,
 	baseCurrency   : settings.baseCurrency,
 	targets   : settings.targets.split(','), 
 	showFallbackOnAutodetectFailure   : settings.showFallbackOnAutodetectFailure==='1',

@@ -10,13 +10,14 @@
         </style>
     {% endif %}
 
-    <section
+    <div id="gallery-wrap" class="collection-area">
+    <!--<section
         id="grid-gallery-{{ gallery.id }}"
         data-offset="{{ settings.area.distance }}"
         data-width="{{ settings.area.photo_width }}{% if settings.area.photo_width_unit == 1 %}%{% endif %}"
         class="gird-gallery {% if settings.area.grid == '1' %}gird-gallery-fluid{% else %}gird-gallery-fixed{% endif %} {% if environment.getConfig().get('optimizations') == 1 and environment.isPro() == false %}optimizations{% endif %}"
         style="width:{{ settings.area.width ~ settings.area.width_unit|replace(['px', '%']) }};height:{{ settings.area.height }}{% if settings.area.height != 'auto' %}px;overflow:hidden{% endif %};"
-    >
+    >-->
 
         {% if categories is defined and categories is not empty and environment.isPro() %}
             {% if settings.categories is defined and settings.categories.enabled == 'true' and settings.categories.position == 'top' %}
@@ -95,7 +96,7 @@
             {{ paginationButtons }}
         {% endif %}
 
-        <section id="photos-{{ gallery.id }}" class="grid-gallery-photos {% if environment.isPro() and settings.pagination is defined and settings.pagination.enabled == 'true' %}grid-gallery-pagination{% endif %}" {% if environment.isPro() and settings.pagination is defined and settings.pagination.enabled == 'true' %}data-per-page="{{ settings.pagination.per_page }} "{% endif %}>
+        <!--<section id="photos-{{ gallery.id }}" class="grid-gallery-photos  {% if environment.isPro() and settings.pagination is defined and settings.pagination.enabled == 'true' %}grid-gallery-pagination{% endif %}" {% if environment.isPro() and settings.pagination is defined and settings.pagination.enabled == 'true' %}data-per-page="{{ settings.pagination.per_page }} "{% endif %}>-->
             {% import '@galleries/shortcode/helpers.twig' as helper %}
             {% import '@galleries/shortcode/post_helpers.twig' as post_helper %}
 
@@ -113,7 +114,7 @@
                 {{ paginationButtons }}
             {% endif %}
 
-        </section>
+        <!--</section>-->
         {% if categories is defined and categories is not empty and environment.isPro() %}
             {% if settings.categories is defined and settings.categories.enabled == 'true' and settings.categories.position == 'bottom' %}
                 {% set navStyle %}
@@ -147,7 +148,8 @@
             {% endif %}
         {% endif %}
        <div class="gird-gallery-clearfix"></div>
-    </section>
+    <!--</section>-->
+    </div>
 
     {% if settings.mouse_shadow == '1' %}
         <script type="text/javascript">

@@ -185,7 +185,7 @@ overflow:hidden;
 }
 #header .panel .drop {
     position: absolute;
-    right: 50%;
+    right: 120%;
     top: 100%;
     width: 90px;
     z-index: 9999;
@@ -445,8 +445,14 @@ overflow:hidden;
     position: relative;
     vertical-align: middle;
     width: 28.5%;
+    height: 350px;
+    overflow: hidden;
 }
-#main #gallery-wrap .img-hold a{ display: block;}
+#main #gallery-wrap .img-hold a{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
 
 #main .collection-area .img-hold:first-child{ margin: 0 0 10px;}
 #main .collection-area .img-hold {
@@ -617,7 +623,7 @@ overflow:hidden;
 #main .breadcrumbs ul {
     margin: 0 auto;
     padding: 0 10px;
-    max-width: 960px;
+   /* max-width: 960px;*/
     list-style: none;
     line-height: 46px;
     font-weight: bold;
@@ -787,7 +793,7 @@ overflow:hidden;
 }
 #nav.nav a{
     color: #000;
-    text-none;
+    text-decoration: none;
     font-style: italic;
 
 }
@@ -1078,7 +1084,6 @@ overflow:hidden;
     height: 33px;
     color: #000;
     width: 100%;
-    text-transform: capitalize;
     -webkit-box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.6);
     box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.6);
 }
@@ -1156,7 +1161,8 @@ overflow:hidden;
     background: -o-linear-gradient(top,  #f0ecd9 0%,#f0ecda 42%,#fefdfb 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #f0ecd9 0%,#f0ecda 42%,#fefdfb 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #f0ecd9 0%,#f0ecda 42%,#fefdfb 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ecd9', endColorstr='#fefdfb',GradientType=0 ); /* IE6-8 */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0ecd9', endColorstr='#fefdfb',GradientType=0 );
+} /* IE6-8 */
 
 /*Google Select */
 .goog-te-gadget-simple{
@@ -1166,17 +1172,6 @@ overflow:hidden;
 
 
 /*Style End */
-
-
-
-
-
-
-
-
-
-
-    }
 #footer .holder{
     max-width: 960px;
     margin: 0 auto 62px;
@@ -1291,6 +1286,16 @@ overflow:hidden;
     color: #000;
     cursor: pointer;
 }
+@media only screen and (min-width:768px) and (max-width:1199px) {
+    #main #gallery-wrap .img-hold {
+        width: 300px;
+        height: 250px;
+    }
+    #main .col-details img, #main .collection-area img {
+        height: 100%;
+    }
+}
+
 
 @media only screen and (max-width:960px) {
     body { min-width: 320px; }
