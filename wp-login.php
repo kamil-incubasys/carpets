@@ -876,9 +876,7 @@ case 'register' :
                 <div class="left">
                         <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(wp_unslash($user_login)); ?>" size="20" placeholder="Username" />
                 </div>
-        </div>
-        <div class="col">
-                <div class="left">
+                <div class="right">
                         <input type="email" class="email" name="user_email" id="user_email" class="input" value="<?php echo esc_attr( wp_unslash( $user_email ) ); ?>" size="25" placeholder="Email Address*" />
                 </div>
         </div>

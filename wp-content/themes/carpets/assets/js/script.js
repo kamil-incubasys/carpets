@@ -68,8 +68,6 @@ $(document).ready(function () {
         $( 'div.total-area div.sub-wrap div.data span' ).first().html('<strong>' + code + '</strong>');
     }
     
-    $( 'form.checkout' ).on('mouseover', 'span.select-country_to_state', function(){ $( this ).css('width', '316px');});
-    $( 'body' ).on('mouseover mouseout mousemove', 'div#wrapper', function(){ $( 'span.select-country_to_state' ).trigger('mouseover');});
     $( '.payment_method_paypal img' ).css('width', '70px');
 
     code = $( 'ul.product-categories' ).html();
@@ -366,6 +364,8 @@ $(document).ready(function () {
                 $( '.scc_upd' ).click();
             });
         }, 1000);
+        
+        $( 'span.select-country_to_state' ).css('width', '316px');
     });
 });
 })(jQuery);

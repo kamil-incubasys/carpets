@@ -5,10 +5,12 @@
         <group>
             <file>file:/var/www/carpets/wp-content/themes/carpets/footer.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/header.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/sidebar-static.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/sidebar.php</file>
+            <file>file:/var/www/carpets/wp-login.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/assets/js/script.js</file>
             <file>file:/var/www/carpets/wp-content/plugins/woocommerce/includes/wc-template-functions.php</file>
-            <file>file:/var/www/carpets/wp-content/plugins/woocommerce-products-per-page/includes/class-wppp-dropdown.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/cimy-user-extra-fields/cimy_uef_register.php</file>
             <file>file:/var/www/carpets/wp-content/plugins/woocommerce/includes/wc-template-hooks.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/single-product.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/content-single-product.php</file>
@@ -16,8 +18,11 @@
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/archive-product.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/single-product/product-image.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/cart/cart.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/ch_scc_woo/js/jquery.scc.min.js</file>
+            <file>file:/var/www/carpets/wp-content/plugins/ch_scc_woo/js/scc_postready.js</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/index.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/style.css</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/functions.php</file>
         </group>
     </open-files>
 </project-private>
