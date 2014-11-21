@@ -147,90 +147,122 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
 	$classes = apply_filters( 'login_body_class', $classes, $action );
 
 	?>
-            <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.min.js"></script>
+            <!--<script type="text/javascript" src="<?php /*bloginfo('template_directory') */?>/assets/js/jquery.min.js"></script>-->
             <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
+            <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
+        <script>var siteUrl = '<?php echo get_site_url(); ?>';</script>
 	</head>
 	<!--<body class="login <?php echo esc_attr( implode( ' ', $classes ) ); ?>">-->
             <body>
 	<div id="wrapper">
-		<header id="header">
-			<div class="top-bar">
-				<div class="holder">
-					<form action="#" class="search-form">
-						<fieldset>
-							<input type="search" class="search" placeholder="SEARCH....">
-							<input type="submit" value="search">
-						</fieldset>
-					</form>
-					<div class="panel">
-						<div class="lang">
-							<a href="#" class="icon">Language</a>
-							<div class="drop">
-								<div class="list">
-									<ul>
-										<li><a href="#">ENG</a></li>
-										<li><a href="#">中文</a></li>
-										<li><a href="#">JAP</a></li>
-										<li><a href="#">KOR</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="currency">
-							<a href="#" class="icon">Currency</a>
-							<div class="drop">
-								<div class="list">
-									<ul>
-										<li><a href="#">SGD</a></li>
-										<li><a href="#">USD</a></li>
-										<li><a href="#">RMB</a></li>
-										<li><a href="#">YEN</a></li>
-										<li><a href="#">EURO</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<a href="#" class="login">Log in</a>
-					</div>
-					<strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
-				</div>
-			</div>
-			<nav id="nav">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Collections</a></li>
-					<li><a href="#">Maintenance</a></li>
-					<li><a href="#">Testimonials</a></li>
-					<li><a href="#">Delivery</a></li>
-				</ul>
-			</nav>
-		</header>
-		<section class="slider">
-			<div class="mask">
-				<div class="slideset">
-					<div class="slide">
-						<img src="<?php bloginfo('template_directory') ?>/assets/images/img.jpg" alt="">
-					</div>
-					<div class="slide">
-						<img src="<?php bloginfo('template_directory') ?>/assets/images/img1.jpg" alt="">
-					</div>
-					<div class="slide">
-						<img src="<?php bloginfo('template_directory') ?>/assets/images/img2.jpg" alt="">
-					</div>
-				</div>
-			</div>
-			<div class="holder">
-				<div class="heading">
-                                        <?php if ($_REQUEST['action'] == 'register'):?>
-                                            <h1>CREATE AN ACCOUNT</h1>
-                                        <?php else: ?>
-                                            <h1>LOG IN</h1>
-                                        <?php endif; ?>
-					<a href="#" class="btn-next">Next</a>
-					<a href="#" class="btn-prev">Prev</a>
-				</div>
-			</div>
-		</section>
+    <header id="header">
+        <div class="top-bar">
+            <div class="holder">
+                <form action="#" class="search-form">
+                    <fieldset>
+                        <input type="search" class="search" placeholder="SEARCH....">
+                        <input type="submit" value="search">
+                    </fieldset>
+                </form>
+                <div class="panel">
+                    <div class="lang">
+                        <a href="#" class="icon">Language</a>
+
+                        <div class="drop">
+                            <div class="list">
+                                <ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="currency">
+                        <a href="#" class="icon">Currency</a>
+
+                        <div class="drop">
+                            <div class="list">
+                                <ul>
+                                    <li><a href="CN" class="switch_currency">CNY</a></li>
+                                    <li><a href="RE" class="switch_currency">EUR</a></li>
+                                    <li><a href="JP" class="switch_currency">JPY</a></li>
+                                    <li><a href="SG" class="switch_currency">SGD</a></li>
+                                    <li><a href="US" class="switch_currency">USD</a></li>
+                                    <li>
+                                        <div class="tooltipster-content">
+                                            <div class="scc_tooltip_settings">More ...</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if (is_user_logged_in()) {
+                        echo '<a href="' . wp_logout_url() . '" class="login">Log out</a>';
+                    } else {
+                        echo '<a href="' . wp_login_url() . '" class="login">Log in</a>';
+                    }?>
+                    <a href="<?php echo get_site_url(); ?>/cart" class="cart-bg"></a>
+
+                </div>
+                <strong class="logo"><a href="<?php echo get_site_url(); ?>">Handmade Carpet Gallery</a></strong>
+
+                <nav id="nav" class="add-nav">
+                    <a href="" class="opener">open</a>
+                    <?php
+                    $defaults = array(
+                        'container_class' => 'holder',
+                        'menu_class' => 'fnav',
+                        'menu' => 'header-nav',
+                        'items_wrap' => '<ul class="%2$s">%3$s</ul>'
+
+                    );
+
+                    wp_nav_menu($defaults);
+                    ?>
+                </nav>
+            </div>
+        </div>
+        <nav id="nav" class="main-nav">
+            <a href="" class="opener">open</a>
+
+            <?php
+            $defaults = array(
+                'container_class' => 'holder',
+                'menu_class' => 'fnav',
+                'menu' => 'header-nav',
+                'items_wrap' => '<ul class="%2$s">%3$s</ul>'
+
+            );
+
+            wp_nav_menu($defaults);
+            ?>
+        </nav>
+    </header>
+
+    <section class="slider">
+        <div class="mask">
+            <div class="slideset">
+                <div class="slide">
+                    <img src="<?php bloginfo('template_directory') ?>/assets/images/img.jpg" alt="">
+                    <span class="slide-title"><span>Collection</span></span>
+                </div>
+                <div class="slide">
+                    <img src="<?php bloginfo('template_directory') ?>/assets/images/img1.jpg" alt="">
+                    <span class="slide-title"><span>DESIGN</span></span>
+                </div>
+                <div class="slide">
+                    <img src="<?php bloginfo('template_directory') ?>/assets/images/img2.jpg" alt="">
+                    <span class="slide-title"><span>MAINTENANCE</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="holder">
+            <div class="heading">
+                <!-- <h1><?php echo get_the_title(); ?></h1> -->
+                <a href="#" class="btn-next">Next</a>
+                <a href="#" class="btn-prev">Prev</a>
+            </div>
+        </div>
+    </section>
 		<div id="main">
                         <?php if ($_REQUEST['action'] == 'register'):?>
                             <h2>New Customer</h2>
@@ -359,17 +391,47 @@ function login_footer($input_id = '') {
 				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo6.png" alt=""></li>
 			</ul>
 			<div class="info-area">
-				<ul class="fnav">
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Inspiration</a></li>
-					<li><a href="#">Store Directory</a></li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
-				</ul>
-				<span class="info">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>
-			</div>
+                <?php
+                $defaults = array(
+                    'container_class' => 'holder',
+                    'menu_class' => 'fnav',
+                    'menu'       => 'footer-nav',
+                    'items_wrap'      => '<ul class="%2$s">%3$s</ul><span  class="hidden-sm">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span></span><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>'
+
+                );
+
+                wp_nav_menu( $defaults );
+                ?>
+
+            </div>
 		</footer>
+    <script>
+        (function($){
+            $(document).ready(function () {
+                if($(".main-nav").offset()!=undefined){
+                    var navPos = $(".main-nav").offset().top;
+                    $(window).scroll(function(){
+                        var scrollPos = $(this).scrollTop();
+                        if(scrollPos >= navPos){
+                            $('.add-nav').css({"display":"block"});
+                            $('.logo, .lang, .currency, .login, .main-nav').hide();
+                        }else if(scrollPos < navPos){
+                            $('.add-nav').css({"display":"none"});
+                            $('.logo, .lang, .currency, .login, .main-nav').show();
+                        }
+                    });
+                }
+
+            });
+        })(jQuery);
+
+
+
+        // Call methods and such...
+        // var highlightMin = Math.random() * 20,
+        //     highlightMax = highlightMin + Math.random() * 80;
+        // $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);
+    </script>
 	</div>
 </body>
 </html>
@@ -808,7 +870,7 @@ case 'rp' :
 <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
 <?php
 if ( get_option( 'users_can_register' ) ) :
-	$registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register' ) );
+	$registration_url = sprintf( '<a href="%hands">%s</a>', esc_url( wp_registration_url() ), __( 'Register' ) );
 
 	/** This filter is documented in wp-includes/general-template.php */
 	echo ' | ' . apply_filters( 'register', $registration_url );

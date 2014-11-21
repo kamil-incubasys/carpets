@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying product content within loops.
  *
@@ -41,7 +42,7 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 	<?php // do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
 	<a href="<?php the_permalink(); ?>">
-
+		<div class="shop-images">
 		<?php
 			/**
 			 * woocommerce_before_shop_loop_item_title hook
@@ -51,6 +52,7 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 			 */
 			do_action( 'woocommerce_before_shop_loop_item_title' );
 		?>
+		</div>
 
 		
                 
@@ -58,6 +60,10 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
                     <span class="ico-new">New</span>
                     <ul class="products">
                     <li><h4><?php the_title(); ?></h4></li>
+                        <?php /*echo "<pre>";print_r(WC()->cart->get_cart()); print_r($product);die();;if ( ! $product->is_visible() )
+                        echo apply_filters( 'woocommerce_cart_item_name', $product->get_title(), $product,$product );
+                        else
+                        echo apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s</a>', $_product->get_permalink(), $_product->get_title() ), $product, $product );*/?>
 		<?php
 			/**
 			 * woocommerce_after_shop_loop_item_title hook

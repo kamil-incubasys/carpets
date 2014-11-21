@@ -223,7 +223,7 @@ function initCarousel() {
 		btnNext: '.btn-next',
 		stretchSlideToMask: true,
 		maskAutoSize: true,
-		autoRotation: false,
+		autoRotation: true,
 		switchTime: 3000,
 		animSpeed: 500,
 		step: 1
@@ -271,7 +271,7 @@ function initCarousel() {
 			stretchSlideToMask: false,
 			circularRotation: true,
 			disableWhileAnimating: false,
-			autoRotation: false,
+			autoRotation: true,
 			pauseOnHover: isTouchDevice ? false : true,
 			maskAutoSize: false,
 			switchTime: 4000,
