@@ -6,9 +6,7 @@
     <title><?php bloginfo('name'); ?> <?php wp_title('-'); ?></title>
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css"/>
     <link rel="stylesheet" href="<?php bloginfo('template_directory') ?>/assets/css/jquery.nstSlider.min.css" type="text/css"/>
-
     <?php wp_head(); ?>
-
     <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/jquery.main.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/gallery.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_directory') ?>/assets/js/script.js"></script>
@@ -69,7 +67,7 @@
                     <a href="<?php echo get_site_url(); ?>/cart" class="cart-bg"></a>
 
                 </div>
-                <strong class="logo"><a href="#">Handmade Carpet Gallery</a></strong>
+                <strong class="logo"><a href="<?php echo get_site_url(); ?>">Handmade Carpet Gallery</a></strong>
 
                 <nav id="nav" class="add-nav">
                     <a href="" class="opener">open</a>

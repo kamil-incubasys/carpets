@@ -10,6 +10,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 ?>
 
 <?php
@@ -40,6 +41,25 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<div class="summary entry-summary">
             <div class="thumbnails-holder">
+                        <div class="thumbnail-holder">
+                        	<div class="slideshow">
+                                    <div class="mask">
+                                        <div class="slideset" id="product_images">
+                                            <div class="slide">
+                                                <?php do_action( 'woocommerce_before_single_product_summary' ); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination">
+                                        <ul id="gallery_links">
+                                            <li><a href="#"></a></li>
+                                        </ul>
+                                    </div>
+                                    <?php $arr = wp_upload_dir(); ?>
+                                    <input type="hidden" id="wp_upload_dir" value="<?php echo $arr['url']; ?>">
+
+	</div><!-- .summary -->
+        </div>
                 <div class="detail-holder">
                     <div class="head">
                         <strong class="serial-no"><?php woocommerce_template_single_price(); ?></strong>
@@ -81,31 +101,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		?>
 
                 </div>
-                        <div class="thumbnail-holder">
-                        	<div class="slideshow">
-                                    <div class="mask">
-                                        <div class="slideset" id="product_images">
-                                            <div class="slide">
-                                                <?php do_action( 'woocommerce_before_single_product_summary' ); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination">
-                                        <ul id="gallery_links">
-                                            <li><a href="#"></a></li>
-                                        </ul>
-                                    </div>
-                                    <?php $arr = wp_upload_dir(); ?>
-                                    <input type="hidden" id="wp_upload_dir" value="<?php echo $arr['url']; ?>">
-
-	</div><!-- .summary -->
-        </div>
         </div>
         <strong id="related_products_heading" class="sub-title">YOU MIGHT ALSO LIKE THIS</strong>
         <div class="col-details" id="related_products"></div>
 
 	<meta itemprop="url" content="<?php the_permalink(); ?>" />
 
-</div><!-- #product-<?php the_ID(); ?> -->
+</div></div><!-- #product-<?php the_ID(); ?> -->
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>

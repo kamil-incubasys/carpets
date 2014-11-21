@@ -64,7 +64,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							else
 								echo apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s">%s</a>', $_product->get_permalink(), $_product->get_title() ), $cart_item, $cart_item_key );
 
-							echo '<pre>';
+							//echo '<pre>';
 
 //                                                    print_r($_product);
                                                     ?>
