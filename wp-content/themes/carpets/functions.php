@@ -93,4 +93,52 @@ function isa_woo_cart_attributes($cart_item, $cart_item_key){
 }
 
 add_filter( 'woocommerce_cart_item_name', isa_woo_cart_attributes, 10, 2 );
+
+
+add_shortcode( 'featured_product_categories', 'jc_featured_products' );
+function jc_featured_products($atts){
+    $cats = explode(',', $atts['cats']);
+    
+    //$terms = get_term_by('id', 31, 'product_cat');
+    //$args = array( 'taxonomy' => 'product_cat' );
+    //$terms = get_terms('product_cat', $args);
+    $count = count($cats); 
+    if ($count > 0) {
+
+        for ($i = 0 ; $i < $count;$i++) {
+            
+                $term = get_term_by('id', $cats[$i], 'product_cat');
+            	do_action( 'woocommerce_before_subcategory', $term ); ?>
+        <div class="img-hold">
+	<a href="<?php echo get_term_link( $term->slug, 'product_cat' ); ?>">
+                
+		<?php
+			/**
+			 * woocommerce_before_subcategory_title hook
+			 *
+			 * @hooked woocommerce_subcategory_thumbnail - 10
+			 */
+			do_action( 'woocommerce_before_subcategory_title', $term );
+		?>
+
+                <span class="caption">
+                    <?php
+                            echo $term->name;
+                    ?>
+                </span>
+
+		<?php
+			/**
+			 * woocommerce_after_subcategory_title hook
+			 */
+			do_action( 'woocommerce_after_subcategory_title', $term );
+		?>
+	</a>
+        </div>
+
+	<?php do_action( 'woocommerce_after_subcategory', $term ); 
+        }
+
+    }
+}
 ?>

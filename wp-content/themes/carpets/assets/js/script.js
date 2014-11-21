@@ -231,6 +231,8 @@ $(document).ready(function () {
     $( '.filter_price' ).click(function(){
         $( this ).parent('form').submit();
     });
+    
+    $( '#home_template .col-details' ).before($( '#home_template .collection-area' ));
 
     function checkParentCategoriesCheckBoxes(obj){
         var code = obj.parent('li').html();
