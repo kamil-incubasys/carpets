@@ -4,7 +4,7 @@
                                     	<h3>NEED AN EXPERT OPINION?</h3>
 					<p>Not everyone can be an interior design expert; which is why we’ve sorted that out for you. </p>
                                         <p>Our free interior design consultation will help you decide which carpet is best for your house – to really make it a home.</p>
-                                    <?php elseif (is_page('about-us-2')): ?>
+                                    <?php elseif (is_page('about-us')): ?>
                                         <h3>HANDMADE CARPET GALLERY</h3>
                                         <ul class="sidenav">
                                                 <li><a href="#">History</a></li>

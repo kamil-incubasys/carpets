@@ -2076,4 +2076,8 @@ box-shadow: 1px 1px 1px 1px #4F4F4F;
 .current_page_item a,.current-menu-item a {
     font-weight: bold;
 }
-
+.incubasys{
+    left: 50%;
+    position: absolute;
+    margin-left: -90px;
+}

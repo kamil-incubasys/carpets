@@ -383,12 +383,12 @@ function login_footer($input_id = '') {
 				</div>
 			</div>
 			<ul class="payment-list">
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo1.png" alt=""></li>
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo2.png" alt=""></li>
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo3.png" alt=""></li>
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo4.png" alt=""></li>
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo5.png" alt=""></li>
-				<li><img src="<?php bloginfo('template_directory') ?>/assets/images/logo6.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/dhl.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/fedex.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/mastercard.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/paypal.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/visa.png" alt=""></li>
+                <li><img src="<?php bloginfo('template_directory') ?>/assets/images/ups.png" alt=""></li>
 			</ul>
 			<div class="info-area">
                 <?php
@@ -396,7 +396,7 @@ function login_footer($input_id = '') {
                     'container_class' => 'holder',
                     'menu_class' => 'fnav',
                     'menu'       => 'footer-nav',
-                    'items_wrap'      => '<ul class="%2$s">%3$s</ul><span  class="hidden-sm">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span></span><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@hanmadecarpetgallery.com</a></span>'
+                    'items_wrap'      => '<ul class="%2$s">%3$s</ul><span  class="hidden-sm incubasys">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span></span><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@handmadecarpetgallery.com</a></span>'
 
                 );
 
