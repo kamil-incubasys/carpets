@@ -118,7 +118,9 @@ select {
     float: right;
     border-bottom: 1px solid #000;
 }
-
+#goog-gt-tt{
+    display: none!important;
+}
 #header .search-form .search:focus,
 #header .search-form input[type="search"]:focus { outline: none}
 
