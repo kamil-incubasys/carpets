@@ -1192,9 +1192,10 @@ img.scc_settings_icon{display:none !important;}
 #content .form input[type="submit"] {
     float: left;
     margin: 0 0 6px;
-    background: #c32d00;
-    color: #fff;
-    border: none;
+    background: #c32d00 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0 !important;
     height: 36px;
     width: 180px;
     font-size: 14px !important;
@@ -1205,7 +1206,7 @@ img.scc_settings_icon{display:none !important;}
 }
 #content .form .col-4 input[type="submit"]:hover,
 #content .form input[type="submit"]:hover{
-    background:#96230d;
+    background:#96230d !important;
 }
 #content .form .col-4 input[type="submit"]{ width: 100%;}
 #content .form .title {
@@ -2121,4 +2122,7 @@ box-shadow: 1px 1px 1px 1px #4F4F4F;
     display: inline-block;
     vertical-align: middle;
     height: inherit;
+}
+.red {
+    color: #c32d00;
 }

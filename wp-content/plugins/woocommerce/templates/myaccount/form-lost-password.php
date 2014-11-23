@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <?php wc_print_notices(); ?>
-
+<section id="content">
 <form method="post" class="form lost_reset_password">
 
 	<?php if( 'lost_password' == $args['form'] ) : ?>
 
-        <p><?php echo apply_filters( 'woocommerce_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce' ) ); ?></p>
+        <p class="red"><?php echo apply_filters( 'woocommerce_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce' ) ); ?></p>
 
         <!--<p class="form-row form-row-first"><label for="user_login"><?php _e( 'Username or email', 'woocommerce' ); ?></label> <input class="input-text" type="text" name="user_login" id="user_login" /></p>-->
         <div class="col">
@@ -66,3 +66,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_nonce_field( $args['form'] ); ?>
 
 </form>
+    </section>

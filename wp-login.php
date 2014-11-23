@@ -275,7 +275,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
                                             <h3>CREATE AN ACCOUNT</h3>
                                             <p>To expedite future checkouts and receive emails.</p>
                                         <?php else:?>
-                                            <h3>New Customer</h3>
+                                            <h3>Hi There</h3>
                                             <p>New customer? <a href="#" class="click-here">CLICK HERE!</a></p>
                                         <?php endif; ?>
                             </aside>

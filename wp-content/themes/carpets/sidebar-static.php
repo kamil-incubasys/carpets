@@ -1,4 +1,4 @@
-<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout') && !is_page('faq') && !is_page('gallery') && !is_page('interior-design') && !is_page('login') && !is_page('maintenance') && !is_page('terms-and-conditions') && !is_page('custom-made')): ?>
+<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout') && !is_page('faq') && !is_page('gallery') && !is_page('interior-design') && !is_page('login') && !is_page('maintenance') && !is_page('terms-and-conditions') && !is_page('My Account') && !is_page('custom-made')): ?>
     <aside id="sidebar">
         <?php if (is_page('design')): ?>
             <h3>NEED AN EXPERT OPINION?</h3>
