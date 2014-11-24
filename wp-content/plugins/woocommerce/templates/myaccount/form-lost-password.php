@@ -67,3 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </form>
     </section>
+<script type="text/javascript">
+    jQuery('#reg_passmail').html('');
+    jQuery('#reg_passmail').append('<div class="col"></div>');
+</script>

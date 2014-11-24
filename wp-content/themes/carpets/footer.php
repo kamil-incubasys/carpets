@@ -12,12 +12,12 @@
 					</div>
 				</div>
 				<ul class="payment-list">
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/dhl.png" alt=""></li>
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/fedex.png" alt=""></li>
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/mastercard.png" alt=""></li>
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/paypal.png" alt=""></li>
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/visa.png" alt=""></li>
-					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/ups.png" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/dhl.svg" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/fedex.svg" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/mastercard.svg" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/paypal.svg" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/visa.svg" alt=""></li>
+					<li><img src="<?php bloginfo('template_directory') ?>/assets/images/ups.svg" alt=""></li>
 				</ul>
 
 			
@@ -51,7 +51,7 @@
                         $('.rightLabel').text(rightValue);
                         $( '#min_price' ).val(leftValue);
                         $( '#max_price' ).val(rightValue);
-                    },
+                    }
                 });
                 if($(".main-nav").offset()!=undefined){
                     var navPos = $(".main-nav").offset().top;

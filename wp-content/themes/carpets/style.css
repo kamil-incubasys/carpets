@@ -90,7 +90,7 @@ select {
     text-indent: -9999px;
     display: block;
     margin: 5px auto 0;
-    background: url(assets/images/logo.png) no-repeat;
+    background: url(assets/images/logo.svg) no-repeat;
     width: 251px;
     height: 23px;
 }
@@ -133,7 +133,7 @@ select {
     margin: 2px 0 0;
     padding: 0;
     cursor: pointer;
-    background: url(assets/images/ico-search.png) no-repeat;
+    background: url(assets/images/ico-search.svg) no-repeat;
     width: 18px;
     height: 18px;
 }
@@ -153,7 +153,7 @@ select {
 #header .panel .currency:hover .drop,
 #header .panel .lang:hover .drop { display: block; }
 #header .panel .lang .icon {
-    background: url(assets/images/ico-lang.png) no-repeat 50% 0;
+    background: url(assets/images/ico-lang.svg) no-repeat 50% 0;
     padding: 22px 0 0;
     font-size: 7px;
     line-height: 10px;
@@ -164,7 +164,7 @@ select {
 #header .panel .lang .active a,
 #header .panel .lang a:hover{ text-decoration: none; font-weight: bold;	}
 #header .panel .currency .icon {
-    background: url(assets/images/ico-currency.png) no-repeat 50% 0;
+    background: url(assets/images/ico-currency.svg) no-repeat 50% 0;
     padding: 22px 0 0;
     font-size: 7px;
     line-height: 10px;
@@ -186,7 +186,7 @@ img.scc_settings_icon{display:none !important;}
     margin:10px 0 0 5px;
 }
 #header .panel .cart-bg{
-    background: url(assets/images/ico-shop.png) no-repeat 100% 0;
+    background: url(assets/images/ico-shop.svg) no-repeat 100% 0;
     width: 21px;
     height: 22px;
     display: inline-block;
@@ -515,10 +515,10 @@ img.scc_settings_icon{display:none !important;}
     width:23.1%;
     margin:0 2.0% 20px -0.2%;
 }
-#main .col-details .col .shop-images{
+/*#main .col-details .col .shop-images{
 	height:231px;
     overflow: hidden;
-}
+}*/
 #main .col-details .col .shop-images img{
 	width:100% !important;
     height:100%;

@@ -157,6 +157,11 @@ $(document).ready(function () {
         $( '#searchform label' ).first().remove();
         $( '#searchform input' ).first().attr('placeholder', 'SEARCH....');
     }
+    if($('#reg_passmail').html()!==undefined){
+        $('#reg_passmail').html('');
+        $('#reg_passmail').append('<div class="col"></div>');
+    }
+
     
     code = $( 'nav.woocommerce-breadcrumb' ).html();
     //console.log(code);
