@@ -1,10 +1,16 @@
-<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout') && !is_page('faq') && !is_page('gallery') && !is_page('interior-design') && !is_page('login') && !is_page('maintenance') && !is_page('terms-and-conditions') && !is_page('My Account') && !is_page('custom-made')): ?>
+<?php if (!is_page('delivery') && !is_page('Home') && !is_page('testimonials') && !is_page('checkout') && !is_page('faq') && !is_page('gallery') && !is_page('interior-design') && !is_page('login') && !is_page('maintenance') && !is_page('terms-and-conditions') && !is_page('My Account') && !is_page('thank-you')): ?>
     <aside id="sidebar">
         <?php if (is_page('design')): ?>
             <h3>NEED AN EXPERT OPINION?</h3>
             <p>Not everyone can be an interior design expert; which is why we’ve sorted that out for you. </p>
             <p>Our free interior design consultation will help you decide which carpet is best for your house – to
                 really make it a home.</p>
+        <?php elseif (is_page('custom-made')): ?>
+            <h3>GOT AN IDEA?</h3>
+            <div class="text-wrap">
+                    <p>Please fill in the form below so that we may provide you with additional details for rug(s) of interest or respond to any general inquiry via e-mail. After completing the form, please press the "Send" button.</p>
+                    <p>We will respond to your inquiry via e-mail within 24 hours. Thank you for your patience.</p>
+            </div>
         <?php elseif (is_page('about-us')): ?>
             <h3>HANDMADE CARPET GALLERY</h3>
             <ul class="sidenav">

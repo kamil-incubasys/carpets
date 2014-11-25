@@ -563,6 +563,9 @@ class WPCF7_ContactForm {
 						'wpcf7_strip_quote', $on_sent_ok );
 				}
 			}
+                        else{
+//                            header('Location: '. get_site_url() . '/thank-you');die;
+                        }
 		}
 
 		if ( $ajax ) {

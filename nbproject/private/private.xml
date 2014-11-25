@@ -3,26 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/footer.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/header.php</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/sidebar-static.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/sidebar.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/contact-form-7/includes/contact-form.php</file>
             <file>file:/var/www/carpets/wp-login.php</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/assets/js/script.js</file>
             <file>file:/var/www/carpets/wp-content/plugins/woocommerce/includes/wc-template-functions.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/assets/js/script.js</file>
             <file>file:/var/www/carpets/wp-content/plugins/cimy-user-extra-fields/cimy_uef_register.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/contact-form-7/modules/flamingo.php</file>
             <file>file:/var/www/carpets/wp-content/plugins/woocommerce/includes/wc-template-hooks.php</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/single-product.php</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/content-single-product.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/content-product.php</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/archive-product.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/single-product/product-image.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/cart/cart.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/contact-form-7/includes/controller.php</file>
             <file>file:/var/www/carpets/wp-content/plugins/ch_scc_woo/js/jquery.scc.min.js</file>
             <file>file:/var/www/carpets/wp-content/plugins/ch_scc_woo/js/scc_postready.js</file>
-            <file>file:/var/www/carpets/wp-content/themes/carpets/index.php</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/style.css</file>
             <file>file:/var/www/carpets/wp-content/themes/carpets/functions.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/home.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/footer.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/sidebar-static.php</file>
+            <file>file:/var/www/carpets/wp-content/plugins/woocommerce/templates/content-product_cat.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/loop/price.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/content-single-product.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/single-product.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/woocommerce/archive-product.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/about-us.php</file>
+            <file>file:/var/www/carpets/wp-content/themes/carpets/index.php</file>
         </group>
     </open-files>
 </project-private>
