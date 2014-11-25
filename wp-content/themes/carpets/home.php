@@ -44,4 +44,9 @@ wp_reset_query(); // Remember to reset
 					</div>
                                     </div>
 				</section>
+<style>
+    #main h2 {
+        display: none;
+    }
+</style>
 <?php get_footer(); ?>

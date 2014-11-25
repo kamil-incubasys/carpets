@@ -29,7 +29,7 @@
 						'container_class' => 'holder',
 						'menu_class' => 'fnav',
                         'menu'       => 'footer-nav',
-						'items_wrap'      => '<ul class="%2$s">%3$s</ul><span  class="hidden-sm incubasys">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span></span><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@handmadecarpetgallery.com</a></span>'
+						'items_wrap'      => '<ul class="%2$s">%3$s</ul><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@handmadecarpetgallery.com</a> | &copy; All Rights Reserved </span> <span  class="hidden-sm incubasys">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span>'
 						
 					);
 

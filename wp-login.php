@@ -396,7 +396,7 @@ function login_footer($input_id = '') {
                     'container_class' => 'holder',
                     'menu_class' => 'fnav',
                     'menu'       => 'footer-nav',
-                    'items_wrap'      => '<ul class="%2$s">%3$s</ul><span  class="hidden-sm incubasys">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span></span><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@handmadecarpetgallery.com</a></span>'
+                    'items_wrap'      => '<ul class="%2$s">%3$s</ul><span class="info hidden-sm">(65) 67349500 | <a href="mailto:info@handmadecarpetgallery.com">info@handmadecarpetgallery.com</a> | &copy; All Rights Reserved </span> <span  class="hidden-sm incubasys">Designed and Developed by <a target="_blank" href="http://incubasys.com">Incubasys</a></span>'
 
                 );
 
@@ -866,7 +866,7 @@ case 'rp' :
         </div>
 </form>
 
-        <p id="nav" class="nav">
+        <p id="" class="nav">
 <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
 <?php
 if ( get_option( 'users_can_register' ) ) :
@@ -961,7 +961,7 @@ case 'register' :
         </div>
 </form>
 
-        <p id="nav" class="nav">
+        <p id="" class="nav">
 <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a> |
 <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found' ) ?>"><?php _e( 'Lost your password?' ); ?></a>
 </p>
@@ -1146,7 +1146,7 @@ default:
 </form>
 
 <?php if ( ! $interim_login ) { ?>
-        <p id="nav" class="nav">
+        <p id="" class="nav">
 <?php if ( ! isset( $_GET['checkemail'] ) || ! in_array( $_GET['checkemail'], array( 'confirm', 'newpass' ) ) ) :
 	if ( get_option( 'users_can_register' ) ) :
 		$registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register' ) );
