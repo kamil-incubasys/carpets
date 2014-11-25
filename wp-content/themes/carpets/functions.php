@@ -141,4 +141,11 @@ function jc_featured_products($atts){
 
     }
 }
+
+add_filter( 'wpcf7_form_class_attr', 'your_custom_form_class_attr' );
+
+function your_custom_form_class_attr( $class ) {
+	$class .= ' form';
+	return $class;
+}
 ?>
