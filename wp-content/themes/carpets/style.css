@@ -1275,8 +1275,8 @@ img.scc_settings_icon{display:none !important;}
     margin: 0 0 40px;
 }
 #footer .f-content .image-area img{
-    width: 100%:
-    height100%;
+    width: 100%;
+    height: 100%;
 }
 #footer .f-content img { display: block; }
 #footer .f-content .text-area {
@@ -2127,4 +2127,35 @@ box-shadow: 1px 1px 1px 1px #4F4F4F;
 }
 .red {
     color: #c32d00;
+}
+
+    
+/*Color Wigdet style*/
+.yith-wcan-color.yith-wcan{
+    border: 0 none;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.yith-wcan-color li:first-child{ margin: 0;}
+.yith-wcan-color li {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #fff;
+    text-indent: -9999px;
+    margin: 0 0 0 5px;
+}
+.yith-wcan-color li a{
+    display: block;
+    height: 100%;
+}
+
+.woocommerce .widget_layered_nav ul li:before, .woocommerce .widget_layered_nav ul li:after, .woocommerce-page .widget_layered_nav ul li:before, .woocommerce-page .widget_layered_nav ul li:after {
+    content: " ";
+    display: table;
+}
+.woocommerce .widget_layered_nav ul li, .woocommerce-page .widget_layered_nav ul li {
+    list-style: outside none none;
+    padding: 0 0 1px;
 }

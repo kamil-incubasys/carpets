@@ -217,6 +217,10 @@ $(document).ready(function () {
         form.siblings('h3').remove();
         
         form.html(
+            '<input id="slider_amount_original" type="hidden" value="'+max+'" />'+
+            '<input id="slider_amount" type="hidden" value="'+max+'" />'+
+//            '<div id="slider_amount_original" style="display: none;">'+max+'</div>'+
+            '<div class="amount" id="slider_amount_div" style="display: none;">'+max+'</div>'+
             '<div class="leftLabel"></div><div class="rightLabel"></div>'+
             '<a href="javascript:" class="filter_price">Go</a>'+
             '<div class="nstSlider" data-range_min="0" data-range_max="' +max+ '" data-cur_min="0"  data-cur_max="' +max+ '">'+
@@ -234,7 +238,26 @@ $(document).ready(function () {
     }
     
     $( '.filter_price' ).click(function(){
-        $( this ).parent('form').submit();
+        
+        code = $( '#slider_amount' ).html();
+        if (code !== undefined){
+            var maxChanged = $( '#slider_amount' ).val();
+            var maxOriginal = $( '#slider_amount_original' ).val().trim();
+            var exchangeRate = 0.00;
+            if (maxOriginal < maxChanged){ exchangeRate = maxChanged/maxOriginal;}
+            else if (maxOriginal > maxChanged){ exchangeRate = maxOriginal/maxChanged;}
+            else{ exchangeRate = 1.00;}
+            
+            var min = parseFloat($( '#min_price' ).val());
+            var max = parseFloat($( '#max_price' ).val());
+            
+            min = (min * exchangeRate).toFixed(0);
+            max = (max * exchangeRate).toFixed(0);
+            
+            $( '#min_price' ).val(min);
+            $( '#max_price' ).val(max);
+            $( this ).parent('form').submit();
+        }
     });
     
     $( '#home_template .col-details' ).before($( '#home_template .collection-area' ));
@@ -339,6 +362,7 @@ $(document).ready(function () {
 
 
     $(window).on('load',function(){
+        
         $( '.goog-te-banner-frame').hide();
         var language_widget=jQuery('#primary-sidebar').find('#google_translate_element').html();
         jQuery('.panel').append('<div id="google_translate_carpets"></div>');
@@ -370,6 +394,36 @@ $(document).ready(function () {
                 $( '#scc_currencySelect' ).val($( this ).attr('href'));
                 $( '.scc_upd' ).click();
             });
+            
+            code = $( '#slider_amount_div' ).html();
+            if (code !== undefined){
+                
+                var fontCode = $( '#slider_amount_div font font' ).html()
+                if (fontCode !== undefined){ code = fontCode;}
+                
+                var max = '';
+                var currencyBreak = code.split(' ');
+                if (currencyBreak.length === 1){ max = currencyBreak[0];}
+                else if (currencyBreak.length > 1){
+                    var max = currencyBreak[1].replace(/,/g, '');
+                }
+                
+                $( '#max_price' ).val(max);
+                $( '#slider_amount' ).val(max);
+                $( '.nstSlider' ).data('range_max', max);
+                $( '.nstSlider' ).data('cur_max', max);
+                $( '.nstSlider' ).nstSlider({
+                    "left_grip_selector": ".leftGrip",
+                    "right_grip_selector": ".rightGrip",
+                    "value_bar_selector": ".bar",
+                    "value_changed_callback": function(cause, leftValue, rightValue) {
+                        $('.leftLabel').text(leftValue);
+                        $('.rightLabel').text(rightValue);
+                        $( '#min_price' ).val(leftValue);
+                        $( '#max_price' ).val(rightValue);
+                    }
+                });
+            }
         }, 1000);
         
         $( 'span.select-country_to_state' ).css('width', '316px');

@@ -38,7 +38,7 @@ wp_reset_query(); // Remember to reset
                                         <?php the_content(); ?>
                                         <div class="img-hold">
                                             <a href="<?php echo get_site_url(); ?>/custom-made">
-						<img src="images/img-3.jpg" alt="">
+						<img src="http://carpets.incubasys.com/wp-content/uploads/2014/11/img-31.jpg" alt="">
 						<span class="caption">Custom Made</span>
                                             </a>
 					</div>
