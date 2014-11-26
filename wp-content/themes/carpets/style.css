@@ -480,24 +480,25 @@ img.scc_settings_icon{display:none !important;}
     width: 100%;
 }
 
-#main .collection-area .img-hold:first-child{ margin: 0 0 0;}
+#main .collection-area .img-hold:first-child{ margin: 0 -0.7% 0 0;}
 #main .collection-area .img-hold {
     display: inline-block;
     vertical-align: middle;
     width: 30.5%;
     position: relative;
-    margin:0 -1% 0 4.3%;
+    margin:0 -0.9% 0 4.3%;
 }
 #main .collection-area .caption {
     position: absolute;
     left: 0;
-    top: 20%;
+    top: 50%;
     width: 100%;
     text-align: center;
     font-size: 32px;
     line-height: 36px;
 	font-weight:bold;
     color: #fff;
+    text-transform: uppercase;
 }
 #main .col-details img,
 #main .collection-area img {
@@ -2159,3 +2160,5 @@ box-shadow: 1px 1px 1px 1px #4F4F4F;
     list-style: outside none none;
     padding: 0 0 1px;
 }
+.woocommerce #payment .terms,
+.woocommerce-page #payment .terms{ margin: 0 90px 0 0; !important;}
