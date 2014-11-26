@@ -2160,5 +2160,16 @@ box-shadow: 1px 1px 1px 1px #4F4F4F;
     list-style: outside none none;
     padding: 0 0 1px;
 }
+
 .woocommerce #payment .terms,
-.woocommerce-page #payment .terms{ margin: 0 90px 0 0; !important;}
+.woocommerce-page #payment .terms{
+    margin: 0 90px 0 0; !important;
+    text-align: left !important;
+}
+.woocommerce #payment .terms .checkbox,
+.woocommerce-page #payment .terms .checkbox{
+    display: inline-block;
+    line-height: 18px;
+    text-align: left !important;
+    vertical-align: top;  
+}
